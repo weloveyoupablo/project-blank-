@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#050505" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="PNGEA" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="pngea-build" content="0.29-foundation" />
+
+<title>PNGEA — Mobile</title>
+<style>
+:root{--bg:#050505;--panel:#0b0b0b;--line:#232323;--muted:#777;--text:#f0f0f0;--red:#bd1118}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#090909;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}body{display:flex;justify-content:center;padding:0}.app{position:relative;width:min(430px,100vw);height:100dvh;min-height:620px;background:var(--bg);overflow:hidden;display:flex;flex-direction:column}.status{height:28px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:11px;color:#8b8b8b}.screen{display:none;flex:1;min-height:0;background:var(--bg)}.screen.active{display:flex;flex-direction:column}.top{height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px}.avatar{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid #343434;background:#181818;color:#ddd;font-size:10px;font-weight:900;flex:none}.avatar.small{width:32px;height:32px;font-size:9px}.nowBtn{display:flex;align-items:center;gap:7px;padding:7px 12px;border:1px solid #2c2c2c;border-radius:999px;font-weight:950;font-size:11px;letter-spacing:1.25px;cursor:pointer}.dot{width:7px;height:7px;border-radius:50%;background:#f1f1f1}.searchBtn{font-size:24px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer}.ticker{height:38px;flex:none;margin:0 12px 8px;background:#101010;border:1px solid #202020;border-radius:12px;overflow:hidden;position:relative;display:flex;align-items:center}.ticker:before,.ticker:after{content:"";position:absolute;z-index:2;top:0;bottom:0;width:24px;pointer-events:none}.ticker:before{left:0;background:linear-gradient(90deg,#101010,transparent)}.ticker:after{right:0;background:linear-gradient(270deg,#101010,transparent)}.tickerTrack{display:flex;width:max-content;white-space:nowrap;animation:ticker 36s linear infinite}.tickerItem{display:inline-flex;align-items:center;gap:7px;padding:0 15px;font-size:11px;color:#8b8b8b;cursor:pointer}.tickerItem:after{content:"•";color:#333;margin-left:15px}.tickerLabel{font-size:9px;color:#eee;font-weight:950;letter-spacing:1px}.tickerItem.you .tickerLabel{background:#eee;color:#090909;padding:2px 5px;border-radius:5px}.tickerStrong{color:#ddd;font-weight:800}@keyframes ticker{to{transform:translateX(-50%)}}
+.feed{flex:1;min-height:0;overflow:auto;padding-bottom:14px;scrollbar-width:none}.feed::-webkit-scrollbar{display:none}.pulseWrap{padding:2px 0 9px}.sectionLine{display:flex;align-items:baseline;gap:8px;padding:5px 14px 8px}.sectionLine b{font-size:9px;letter-spacing:1.4px}.sectionLine span{font-size:10px;color:#5e5e5e}.pulse{display:flex;gap:8px;overflow-x:auto;padding:0 12px;scrollbar-width:none}.pulse::-webkit-scrollbar{display:none}.pulseChip{flex:none;border:1px solid #282828;background:#0e0e0e;border-radius:999px;padding:8px 10px;display:flex;align-items:center;gap:8px;cursor:pointer}.pulseChip b{font-size:9px;letter-spacing:.8px}.pulseChip span{font-size:9px;color:#666}.streamLabel{padding:13px 14px 10px;display:flex;gap:8px;align-items:baseline}.streamLabel b{font-size:10px;letter-spacing:1.25px}.streamLabel span{font-size:10px;color:#555}.bubble{margin:0 12px 12px;border:1px solid #1f1f1f;border-radius:18px;background:#090909;padding:15px}.authorRow{display:flex;align-items:center;gap:9px}.authorCopy{flex:1;min-width:0}.authorNameLine{display:flex;align-items:center;gap:5px}.authorName{font-size:13.5px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.verified{font-size:9px;color:#777}.meta{display:block;color:#666;font-size:10.5px;margin-top:2px}.more{color:#555;font-size:10px}.eyebrow{font-size:9px;color:#777;font-weight:950;letter-spacing:1.1px;margin-top:13px}.body{font-size:16px;line-height:1.42;margin-top:8px;color:#e8e8e8}.actions{display:flex;align-items:center;justify-content:space-between;margin-top:14px;color:#777;font-size:11.5px}.action{cursor:pointer}.activeAction{color:#eee}.edgePost{margin:0 0 14px;background:#050505}.edgeVisual{position:relative;width:100%;height:430px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#191919}.edgeVisual.photo{background:radial-gradient(circle at 68% 18%,#454545,#232323 38%,#111 74%)}.edgeVisual.short{background:radial-gradient(circle at 30% 20%,#3b3b3b,#161616 44%,#070707 84%)}.ghost{font-size:54px;font-weight:950;letter-spacing:-2px;color:#303030}.playCircle{position:absolute;width:58px;height:58px;border-radius:50%;background:#eee;color:#090909;display:grid;place-items:center;font-size:21px;padding-left:3px}.duration{position:absolute;right:10px;bottom:10px;background:#050505dc;border-radius:5px;padding:4px 6px;font-size:10px;font-weight:800}.edgeMeta{padding:10px 14px 4px}.caption{font-size:14.5px;line-height:20px;margin-top:9px}.longVideo{margin-bottom:14px;cursor:pointer}.thumb{height:226px;background:radial-gradient(circle at 75% 15%,#393939,#171717 47%,#090909 90%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}.thumb .ghost{font-size:44px}.longMeta{display:flex;gap:10px;align-items:flex-start;padding:10px 12px 0}.videoTitle{font-size:15.5px;line-height:20px;font-weight:850}.videoMeta{font-size:11px;color:#696969;margin-top:4px}.longTitle{font-size:25px;line-height:29px;font-weight:950;letter-spacing:-.4px;margin-top:7px}.readPrompt{font-size:9px;color:#777;font-weight:950;letter-spacing:1.1px;margin-top:14px}.liveIdentity{display:flex;align-items:center;gap:4px;margin-left:2px}.liveDot{width:7px;height:7px;border-radius:50%;background:#ff2e2e;animation:blink 1.2s ease-in-out infinite}.liveText{font-size:9px;color:#ff4545;font-weight:950;letter-spacing:1px}@keyframes blink{50%{opacity:.25}}.liveTitle{font-size:21px;line-height:25px;font-weight:950;margin-top:8px}.livePreview{height:170px;border:1px solid #242424;border-radius:14px;margin-top:12px;background:#111;display:grid;place-items:center;position:relative}.livePreview .watching{position:absolute;left:12px;top:12px;display:flex;align-items:center;gap:6px;font-size:9px;color:#9b9b9b;font-weight:800}.livePreview strong{font-size:38px;color:#333}.breaking{margin:0 12px 12px;border-radius:20px;overflow:hidden;background:#bd1118;border:1px solid #f2363d}.breakTicker{height:25px;overflow:hidden;background:#870c11;display:flex;align-items:center}.breakTrack{width:max-content;white-space:nowrap;animation:breakTicker 4.5s linear infinite}.breakTrack span{font-size:9px;color:#fff;font-weight:950;letter-spacing:1.7px;padding-right:30px}@keyframes breakTicker{to{transform:translateX(-220px)}}.breakInner{padding:15px}.breaking .authorName,.breaking .body{color:#fff}.breaking .meta,.breaking .more,.breaking .actions{color:#ffd0d2}.breakTopic{font-size:9px;color:#ffc3c6;font-weight:950;letter-spacing:1.1px;margin-top:14px}.breakTitle{font-size:31px;line-height:33px;font-weight:950;letter-spacing:-1px;margin-top:6px}.breakBody{font-size:14px;line-height:20px;color:#ffd8da;margin-top:9px}
+.bottom{height:62px;flex:none;border-top:1px solid #1f1f1f;background:#060606;display:flex;align-items:flex-start;justify-content:space-around;padding:8px 18px calc(1px + env(safe-area-inset-bottom));overflow:hidden}.nav{width:33.333%;height:100%;display:flex;align-items:flex-start;justify-content:center;color:#747474;cursor:pointer;position:relative;padding-top:6px}.nav.active{color:#f3f3f3}.navIcon{width:35px;height:35px;display:block;transform:translateY(2px);overflow:visible}.compose{position:absolute;right:18px;bottom:calc(env(safe-area-inset-bottom) + 78px);z-index:22;width:58px;height:58px;border-radius:50%;background:#f2f2f2;color:#070707;display:grid;place-items:center;font-size:31px;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.05)}.simpleTop{height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px}.back{font-size:34px;width:34px;cursor:pointer}.pageTitle{font-size:15px;font-weight:950}.scroller{flex:1;min-height:0;overflow:auto}.searchBox{height:48px;margin:0 14px;border:1px solid #222;background:#111;border-radius:16px;display:flex;align-items:center;gap:8px;padding:0 13px}.searchBox input{flex:1;background:transparent;border:0;outline:0;color:#eee;font-size:15px}.kicker{font-size:9px;color:#5d5d5d;font-weight:950;letter-spacing:1.3px;margin:28px 18px 8px}.result{min-height:70px;margin:0 14px;border-bottom:1px solid #202020;display:flex;align-items:center}.rank{width:36px;color:#555;font-size:12px;font-weight:850}.result b{font-size:15px}.result small{display:block;color:#656565;margin-top:4px}.nowHuge{font-size:38px;font-weight:950;letter-spacing:-1.4px;margin:18px}.story{display:flex;align-items:flex-start;margin:0 14px;padding:20px 0;border-top:1px solid #242424}.storyNum{width:36px;color:#515151;font-size:11px;font-weight:900;padding-top:4px}.storyCopy{flex:1}.storyCopy b{font-size:20px;line-height:1.2}.storyCopy small{display:block;color:#666;margin-top:6px}.arrow{font-size:26px;color:#666}.placeholder{flex:1;display:grid;place-items:center;text-align:center;padding:36px}.placeholder h2{font-size:34px;margin:0}.placeholder p{max-width:290px;color:#777;line-height:1.45}.watchPlayer{height:242px;background:radial-gradient(circle at 65% 20%,#3a3a3a,#161616 45%,#080808 90%);display:grid;place-items:center;position:relative}.watchInfo{padding:15px}.watchTitle{font-size:22px;line-height:27px;font-weight:950}.creatorLine{display:flex;align-items:center;gap:10px;margin-top:15px}.creatorText{flex:1}.creatorText b{font-size:13px}.creatorText small{display:block;color:#666;margin-top:3px}.likePill{background:#eee;color:#080808;border-radius:999px;padding:9px 12px;font-size:11px;font-weight:950}.commentRail{border-top:1px solid #1e1e1e;padding-top:14px}.commentRailLabel{font-size:9px;color:#666;font-weight:950;letter-spacing:1.2px;margin:0 15px 9px}.commentCards{display:flex;overflow-x:auto;padding:0 0 11px;scrollbar-width:none}.commentBubble{width:235px;min-height:120px;flex:none;border:1px solid #252525;background:#101010;border-radius:17px;padding:13px;margin-left:12px}.commentBubble.live{border-color:#492020}.commentBubble b{font-size:8px;color:#6f6f6f;letter-spacing:1px}.commentBubble p{font-size:13px;line-height:18px;margin:8px 0 0}.commentBubble small{color:#676767;font-size:10px;display:block;margin-top:8px}.commentRow{display:flex;gap:10px;padding:15px;border-bottom:1px solid #181818}.commentRow .text{flex:1}.commentRow b{font-size:11px;color:#9b9b9b}.commentRow p{font-size:14px;line-height:20px;margin:4px 0}.commentRow small{font-size:10px;color:#666}.article{padding:20px 20px 80px}.articleKicker{font-size:9px;color:#6b6b6b;font-weight:950;letter-spacing:1.2px}.articleTitle{font-size:35px;line-height:39px;font-weight:950;letter-spacing:-1.2px;margin-top:8px}.byline{display:flex;align-items:center;gap:10px;margin-top:20px;padding-bottom:20px;border-bottom:1px solid #202020}.articleBody{font-size:18px;line-height:29px;color:#d8d8d8;margin-top:25px}.articleEnd{border-top:1px solid #202020;margin-top:35px;padding-top:18px;color:#6b6b6b;font-size:12px}.composerLayer{display:none;position:absolute;inset:0;z-index:20;background:#060606;flex-direction:column}.composerLayer.show{display:flex}.composerTop{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 17px}.close{font-size:32px;width:40px;cursor:pointer}.detected{font-size:9.5px;color:#656565;font-weight:950;letter-spacing:1.3px}.send{width:38px;height:38px;border:0;border-radius:50%;background:#f1f1f1;color:#090909;font-size:20px;font-weight:950}.send:disabled{opacity:.24}.canvas{flex:1;overflow:auto;padding:22px}.canvas textarea{width:100%;min-height:190px;resize:none;border:0;outline:0;background:transparent;color:#f2f2f2;font:500 29px/1.31 inherit;letter-spacing:-.6px}.attachPreview{display:none;min-height:170px;border-radius:20px;margin-top:18px;background:#111;border:1px solid #292929;padding:18px;flex-direction:column;justify-content:flex-end}.attachPreview.show{display:flex}.attachPreview small{font-size:9px;color:#777;font-weight:950;letter-spacing:1.2px}.attachPreview b{font-size:22px;margin-top:7px}.attachPreview button{align-self:flex-start;margin-top:12px;background:none;border:0;color:#888;padding:0}.capture{border-top:1px solid #242424;padding:10px 16px 12px}.captureHint{text-align:center;font-size:8.5px;color:#505050;font-weight:950;letter-spacing:1.25px;margin-bottom:10px}.captureRow{display:flex;justify-content:space-around}.cap{width:68px;min-height:48px;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#ddd;cursor:pointer}.cap b{font-size:21px}.cap span{font-size:9px;color:#676767;margin-top:3px}
+
+/* Bottom navigation icons */
+.homeIcon{width:36px;height:36px;transform:translateY(1px);overflow:visible}
+.homeShape{fill:none;stroke:currentColor;stroke-width:2.35;stroke-linecap:round;stroke-linejoin:round;transition:fill .18s ease,stroke .18s ease}
+.homeWindow,.homeDoor{fill:none;stroke:currentColor;stroke-width:2.05;stroke-linecap:round;stroke-linejoin:round;transition:fill .18s ease,stroke .18s ease}
+.homeCross{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:stroke .18s ease}
+.nav.active .homeShape{fill:currentColor;stroke:currentColor}
+.nav.active .homeWindow,.nav.active .homeDoor{fill:#060606;stroke:#060606}
+.nav.active .homeCross{stroke:#f3f3f3}
+.messageIcon3D{position:relative;width:34px;height:34px;display:block;flex:0 0 34px;transform:translateY(2px)}
+.messageBubbleSvg{position:absolute;inset:0;width:34px;height:34px;overflow:visible;z-index:1}
+.messageBubbleStroke{fill:none;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;transition:fill .18s ease,stroke .18s ease}
+.nav.active .messageBubbleStroke{fill:currentColor;stroke:currentColor}
+.messageGlobeCanvas{position:absolute;left:50%;top:44%;width:18px;height:18px;display:block;z-index:2;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 0 2px rgba(255,255,255,.34)) drop-shadow(0 0 5px rgba(255,255,255,.14))}
+.nav.active .messageGlobeCanvas{filter:none}
+.notificationBeacon{position:relative;width:34px;height:34px;transform:translateY(2px);display:grid;place-items:center}
+.notificationBeacon .beaconCore{width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(178,244,255,.95) 0 13%,rgba(59,171,255,.92) 36%,rgba(33,88,255,.82) 67%,rgba(34,60,180,.58) 100%);box-shadow:0 0 5px rgba(67,145,255,.22),inset -2px -2px 5px rgba(13,36,116,.34);opacity:.5;transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease}
+.notificationBeacon::before,.notificationBeacon::after{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid rgba(80,151,255,.34);opacity:0;transform:scale(.72);pointer-events:none}
+.nav.hasNotifications .notificationBeacon .beaconCore{opacity:.92;box-shadow:0 0 7px rgba(69,150,255,.62),0 0 14px rgba(47,92,255,.3),inset -2px -2px 5px rgba(13,36,116,.3)}
+.nav.hasNotifications .notificationBeacon::before{animation:beaconPulse 2.8s ease-out infinite}
+.nav.hasNotifications .notificationBeacon::after{animation:beaconPulse 2.8s ease-out 1.4s infinite}
+.nav.active .notificationBeacon .beaconCore{opacity:1;transform:scale(1.14);box-shadow:0 0 8px rgba(98,187,255,.82),0 0 18px rgba(56,99,255,.52),inset -2px -2px 5px rgba(13,36,116,.24)}
+@keyframes beaconPulse{0%{opacity:.42;transform:scale(.72)}75%{opacity:.08}100%{opacity:0;transform:scale(1.55)}}
+@media (prefers-reduced-motion:reduce){.nav.hasNotifications .notificationBeacon::before,.nav.hasNotifications .notificationBeacon::after{animation:none;opacity:.16;transform:scale(1.16)}}
+
+@media(min-width:431px){body{padding:18px}.app{height:min(860px,96vh);border:1px solid #292929;border-radius:34px;box-shadow:0 24px 100px #000}}
+
+/* PWA/mobile shell */
+html,body{overscroll-behavior:none;background:#050505}
+body{touch-action:manipulation}
+.app{height:100dvh;padding-top:env(safe-area-inset-top);padding-bottom:0}
+.status{display:none!important}
+.bottom{padding-bottom:max(1px,env(safe-area-inset-bottom))}
+@media (display-mode:standalone){.app{width:100vw;max-width:none}}
+
+/* YOU drawer */
+.sidebarShade{position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.58);opacity:0;pointer-events:none;transition:opacity .22s ease}.sidebarShade.show{opacity:1;pointer-events:auto}.sidebar{position:absolute;z-index:41;left:0;top:0;bottom:0;width:min(84%,360px);background:#080808;border-right:1px solid #242424;transform:translateX(-103%);transition:transform .24s cubic-bezier(.2,.75,.2,1);display:flex;flex-direction:column;padding-top:max(14px,env(safe-area-inset-top))}.sidebar.show{transform:translateX(0)}.sideTop{padding:12px 18px 18px;border-bottom:1px solid #1d1d1d}.sideTopRow{display:flex;align-items:center;justify-content:space-between}.sideClose{width:36px;height:36px;border-radius:18px;border:1px solid #292929;display:grid;place-items:center;color:#aaa;font-size:20px;cursor:pointer}.sideAvatar{width:58px;height:58px;border-radius:50%;border:1px solid #363636;background:#181818;display:grid;place-items:center;font-size:12px;font-weight:950}.sideName{font-size:22px;font-weight:950;letter-spacing:-.35px;margin-top:14px}.sideHandle{font-size:12px;color:#656565;margin-top:3px}.sideStats{display:flex;gap:18px;margin-top:14px}.sideStat{font-size:11px;color:#686868}.sideStat b{color:#ddd;font-size:12px;margin-right:4px}.sideMenu{padding:10px 10px;overflow:auto}.sideItem{min-height:54px;border-radius:14px;display:flex;align-items:center;gap:13px;padding:0 12px;color:#dedede;cursor:pointer}.sideItem:active{background:#141414}.sideIcon{width:28px;text-align:center;font-size:19px;color:#a0a0a0}.sideText{font-size:16px;font-weight:800;flex:1}
+.sideSub{font-size:9px;color:#555;font-weight:800;letter-spacing:.8px;margin-left:8px}
+.sideArrow{color:#444;font-size:20px}
+.sideNow{display:flex;align-items:center;gap:8px}
+.sideNowDot{width:8px;height:8px;border-radius:50%;background:#ff2f2f;box-shadow:0 0 10px rgba(255,47,47,.55);animation:blink 1.2s ease-in-out infinite}
+.sideSettings{min-height:42px;margin-top:4px;color:#777}
+.sideSettings .sideText{font-size:13px;font-weight:650}
+.sideSettings .sideIcon{font-size:16px;color:#666}
+.sideMenuMain{padding-bottom:8px}.sideDivider{height:1px;background:#1d1d1d;margin:9px 12px}.sideFoot{margin-top:auto;border-top:1px solid #1d1d1d;padding:12px 18px calc(16px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;color:#646464;font-size:11px}.sideAccount{display:flex;align-items:center;gap:9px}.sideMini{width:28px;height:28px;border-radius:50%;border:1px solid #333;background:#171717;display:grid;place-items:center;font-size:8px;font-weight:900;color:#ccc}
+
+
+
+
+/* PNGEA APP FOUNDATION — reusable, non-brand-specific UI primitives */
+.uiState{min-height:220px;display:grid;place-items:center;text-align:center;padding:30px 24px;color:#737373}
+.uiState b{display:block;color:#d8d8d8;font-size:16px;margin-bottom:6px}.uiState small{font-size:12px;line-height:1.45}
+.uiSkeleton{position:relative;overflow:hidden;background:#101010;border-radius:10px}.uiSkeleton:after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.055),transparent);animation:uiShimmer 1.35s infinite}@keyframes uiShimmer{to{transform:translateX(100%)}}
+.uiToast{position:absolute;left:50%;bottom:calc(82px + env(safe-area-inset-bottom));z-index:70;transform:translate(-50%,12px);background:#ededed;color:#090909;border-radius:999px;padding:9px 14px;font-size:11px;font-weight:850;opacity:0;pointer-events:none;transition:.2s ease;white-space:nowrap;box-shadow:0 10px 28px rgba(0,0,0,.34)}.uiToast.show{opacity:1;transform:translate(-50%,0)}
+[aria-disabled="true"]{opacity:.45;pointer-events:none}
+
+/* PNGEA scaffolded social screens */
+.xTop{height:54px;display:flex;align-items:center;gap:12px;padding:0 14px;border-bottom:1px solid #181818;flex:none;background:#050505}
+.xBack{font-size:30px;line-height:1;width:30px;cursor:pointer;color:#eee}
+.xTopTitle{min-width:0;flex:1}.xTopTitle b{font-size:16px}.xTopTitle small{display:block;color:#666;font-size:10px;margin-top:1px}
+.xAction{width:34px;height:34px;border:1px solid #292929;border-radius:50%;display:grid;place-items:center;color:#aaa;cursor:pointer;font-size:16px}
+.xScroll{flex:1;min-height:0;overflow:auto;scrollbar-width:none}.xScroll::-webkit-scrollbar{display:none}
+.xTabs{height:48px;display:flex;border-bottom:1px solid #1c1c1c;flex:none;background:#050505}
+.xTab{flex:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#626262;position:relative;cursor:pointer}
+.xTab.active{color:#eee}.xTab.active:after{content:"";position:absolute;left:27%;right:27%;bottom:0;height:2px;border-radius:9px;background:#eee}
+.xPanel{display:none}.xPanel.active{display:block}
+.xAvatar{width:44px;height:44px;border-radius:50%;background:#181818;border:1px solid #313131;display:grid;place-items:center;color:#ddd;font-size:10px;font-weight:900;flex:none}
+.xAvatar.big{width:78px;height:78px;font-size:15px;border:4px solid #050505}
+.xMuted{color:#676767}
+
+/* Profile */
+.profileCover{height:128px;background:linear-gradient(135deg,#181818,#292929 58%,#111);position:relative}
+.profileHead{padding:0 15px 14px;border-bottom:1px solid #181818}
+.profileAvatarRow{height:46px;display:flex;justify-content:space-between;align-items:flex-start}
+.profileAvatarRow .xAvatar.big{transform:translateY(-39px)}
+.profileEdit{margin-top:10px;border:1px solid #343434;border-radius:999px;padding:7px 13px;font-size:11px;font-weight:850;color:#ddd;cursor:pointer}
+.profileName{font-size:22px;font-weight:950;letter-spacing:-.4px}.profileHandle{font-size:12px;color:#666;margin-top:1px}
+.profileBio{font-size:14px;line-height:19px;margin-top:12px;color:#ddd}.profileMeta{display:flex;gap:13px;flex-wrap:wrap;color:#656565;font-size:11px;margin-top:10px}
+.profileStats{display:flex;gap:20px;margin-top:12px;font-size:11px;color:#6e6e6e}.profileStats b{color:#eee;margin-right:4px}
+.xPost{padding:13px 14px;border-bottom:1px solid #171717;display:flex;gap:10px}.xPostBody{min-width:0;flex:1}.xPostWho{display:flex;align-items:center;gap:5px;font-size:12px}.xPostWho b{font-size:13px}.xPostWho span{color:#666;white-space:nowrap}.xPostText{font-size:14px;line-height:19px;margin-top:4px}.xPostMedia{margin-top:10px;height:150px;border-radius:16px;border:1px solid #252525;background:linear-gradient(135deg,#222,#0f0f0f);display:grid;place-items:center;color:#424242;font-size:30px;font-weight:900}.xPostActions{display:flex;justify-content:space-between;color:#606060;font-size:10px;margin-top:10px;padding-right:14px}
+
+/* Messages */
+.dmSearch{height:42px;margin:10px 14px;border-radius:999px;border:1px solid #242424;background:#101010;display:flex;align-items:center;gap:8px;padding:0 13px;color:#666}.dmSearch input{border:0;outline:0;background:transparent;color:#eee;flex:1;font-size:13px}
+.dmRow{display:flex;gap:11px;padding:12px 14px;border-bottom:1px solid #151515;cursor:pointer}.dmRow:active{background:#0b0b0b}.dmCopy{min-width:0;flex:1}.dmLine{display:flex;gap:6px;align-items:center;min-width:0}.dmLine b{font-size:13px;white-space:nowrap}.dmLine span{font-size:11px;color:#656565;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.dmTime{margin-left:auto;color:#555!important;flex:none}.dmPreview{font-size:12px;color:#666;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.unreadDot{width:7px;height:7px;border-radius:50%;background:#e9e9e9;margin:auto 0 auto 4px;flex:none}
+.dmThread{display:none;position:absolute;inset:0;z-index:35;background:#050505;flex-direction:column}.dmThread.show{display:flex}.dmMessages{flex:1;overflow:auto;padding:14px}.msgDay{text-align:center;color:#555;font-size:9px;margin:7px 0 14px}.msgBubble{max-width:78%;padding:10px 12px;border-radius:18px;margin:7px 0;font-size:13px;line-height:18px}.msgBubble.them{background:#141414;border:1px solid #202020}.msgBubble.me{background:#ededed;color:#0a0a0a;margin-left:auto}.dmCompose{height:56px;border-top:1px solid #191919;padding:8px 10px;display:flex;gap:8px}.dmCompose input{flex:1;border:1px solid #252525;border-radius:999px;background:#101010;color:#eee;padding:0 13px;outline:0}.dmCompose button{width:40px;border:0;border-radius:50%;background:#eee;color:#090909;font-weight:900}
+
+/* Notifications */
+.notifRow{display:flex;gap:10px;padding:13px 14px;border-bottom:1px solid #161616}.notifGlyph{width:26px;flex:none;text-align:center;font-size:18px;color:#bdbdbd;padding-top:2px}.notifCopy{flex:1;min-width:0}.notifText{font-size:13px;line-height:18px}.notifText b{font-weight:900}.notifSub{font-size:11px;color:#656565;margin-top:4px}.notifQuote{border:1px solid #222;border-radius:13px;padding:9px 10px;margin-top:9px;color:#aaa;font-size:12px;line-height:16px}
+
+/* Search */
+.searchHero{padding:10px 14px 6px}.searchPill{height:42px;border:1px solid #242424;background:#101010;border-radius:999px;display:flex;align-items:center;gap:8px;padding:0 13px}.searchPill input{flex:1;border:0;outline:0;background:transparent;color:#eee;font-size:13px}.trendRow{padding:12px 14px;border-bottom:1px solid #161616}.trendTop{font-size:10px;color:#5f5f5f}.trendTitle{font-size:15px;font-weight:900;margin-top:2px}.trendMeta{font-size:10px;color:#5f5f5f;margin-top:3px}.peopleRow{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #161616}.peopleCopy{flex:1}.peopleCopy b{font-size:13px}.peopleCopy small{display:block;color:#666;margin-top:2px}.followBtn{border:0;background:#eee;color:#080808;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900}
+
+/* Communities / History */
+.communityCard{margin:12px 14px;border:1px solid #222;border-radius:17px;overflow:hidden;background:#090909}.communityBanner{height:76px;background:linear-gradient(135deg,#292929,#121212)}.communityInner{padding:12px}.communityTitle{font-size:16px;font-weight:900}.communityMeta{font-size:10px;color:#666;margin-top:4px}.communityDesc{font-size:12px;line-height:17px;color:#bbb;margin-top:8px}.communityJoin{margin-top:10px;border:1px solid #333;border-radius:999px;padding:7px 11px;display:inline-block;font-size:10px;font-weight:900}
+.historyRow{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid #161616}.historyThumb{width:66px;height:50px;border-radius:10px;background:#171717;border:1px solid #242424;display:grid;place-items:center;color:#444;flex:none}.historyCopy{flex:1;min-width:0}.historyCopy b{font-size:13px}.historyCopy p{font-size:11px;color:#666;margin:4px 0 0;line-height:16px}
+
+/* Settings */
+.settingsGroup{padding:13px 0;border-bottom:1px solid #181818}.settingsLabel{font-size:9px;letter-spacing:1.2px;color:#555;font-weight:900;padding:0 15px 8px}.settingsRow{min-height:50px;padding:0 15px;display:flex;align-items:center;gap:11px}.settingsRow i{width:24px;color:#777;font-style:normal;text-align:center}.settingsRow b{font-size:13px;flex:1}.settingsRow span{color:#555;font-size:18px}
+
+
+
+/* v0.30 — functional Search + Settings */
+.searchPill{position:relative}.searchPill .searchClear{display:none;border:0;background:#252525;color:#aaa;width:24px;height:24px;border-radius:50%;font-size:15px;line-height:24px;text-align:center;padding:0;cursor:pointer}.searchPill.hasText .searchClear{display:block}
+.searchRecent{border-bottom:1px solid #181818}.searchRecentHead{height:42px;padding:0 14px;display:flex;align-items:center;justify-content:space-between}.searchRecentHead b{font-size:12px}.searchRecentHead button{border:0;background:none;color:#777;font-size:11px;padding:6px;cursor:pointer}.recentRow{height:48px;padding:0 14px;display:flex;align-items:center;gap:11px;border-top:1px solid #121212;cursor:pointer}.recentRow .recentIcon{width:24px;color:#666;text-align:center}.recentRow .recentQuery{flex:1;font-size:13px}.recentRow .recentRemove{border:0;background:none;color:#555;font-size:18px;padding:8px;cursor:pointer}.searchEmpty{min-height:230px;display:grid;place-items:center;text-align:center;padding:34px}.searchEmpty b{font-size:18px}.searchEmpty p{font-size:12px;line-height:18px;color:#666;max-width:245px;margin:7px auto 0}.searchResultPost{padding:13px 14px;border-bottom:1px solid #161616}.searchResultPost .srWho{display:flex;align-items:center;gap:7px;font-size:11px;color:#666}.searchResultPost .srWho b{font-size:12px;color:#ddd}.searchResultPost .srText{font-size:14px;line-height:19px;margin-top:6px}.mediaResult{display:flex;gap:11px;padding:12px 14px;border-bottom:1px solid #161616}.mediaThumb{width:86px;height:62px;border:1px solid #242424;border-radius:11px;background:linear-gradient(135deg,#252525,#101010);display:grid;place-items:center;color:#555;font-size:9px;font-weight:900;flex:none}.mediaCopy{min-width:0;flex:1}.mediaCopy b{font-size:13px;line-height:17px}.mediaCopy small{display:block;color:#666;margin-top:4px;font-size:10px}.searchCount{font-size:9px;color:#555;padding:9px 14px 5px;letter-spacing:.8px;font-weight:850}.trendRow[data-search-term]{cursor:pointer}
+
+#Settings{position:relative}.settingsRow[data-setting-page]{cursor:pointer}.settingsDetail{display:none;position:absolute;inset:0;background:#050505;z-index:12;flex-direction:column}.settingsDetail.show{display:flex}.settingsDetailScroll{flex:1;min-height:0;overflow:auto;padding-bottom:30px}.settingsIntro{padding:14px 16px 18px;border-bottom:1px solid #181818}.settingsIntro b{font-size:20px;display:block}.settingsIntro p{font-size:12px;line-height:18px;color:#707070;margin:6px 0 0}.prefRow{min-height:62px;padding:10px 15px;border-bottom:1px solid #161616;display:flex;align-items:center;gap:12px}.prefCopy{flex:1;min-width:0}.prefCopy b{font-size:13px;display:block}.prefCopy small{display:block;color:#666;font-size:10.5px;line-height:15px;margin-top:3px}.toggle{width:45px;height:26px;border-radius:999px;background:#252525;border:1px solid #353535;position:relative;flex:none;cursor:pointer;transition:.18s}.toggle:after{content:"";position:absolute;width:20px;height:20px;left:2px;top:2px;border-radius:50%;background:#858585;transition:.18s}.toggle.on{background:#ededed;border-color:#ededed}.toggle.on:after{left:21px;background:#090909}.choiceRow{padding:13px 15px;border-bottom:1px solid #161616}.choiceRow>b{font-size:12px}.choiceSet{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.choice{border:1px solid #2b2b2b;border-radius:999px;background:#0d0d0d;color:#777;padding:8px 11px;font-size:10px;font-weight:850;cursor:pointer}.choice.active{background:#eee;color:#080808;border-color:#eee}.settingsField{padding:12px 15px;border-bottom:1px solid #161616}.settingsField label{font-size:9px;color:#666;font-weight:900;letter-spacing:1px;display:block;margin-bottom:7px}.settingsField input{width:100%;height:43px;border:1px solid #292929;background:#0d0d0d;color:#eee;border-radius:12px;padding:0 12px;outline:0;font-size:14px}.settingsSave{margin:16px 15px 0;border:0;background:#eee;color:#080808;border-radius:999px;height:42px;font-size:12px;font-weight:950;width:calc(100% - 30px);cursor:pointer}.settingsNote{padding:14px 15px;color:#666;font-size:10.5px;line-height:16px}.staticSetting{padding:15px;border-bottom:1px solid #161616}.staticSetting b{font-size:13px;display:block}.staticSetting small{font-size:10.5px;line-height:15px;color:#666;display:block;margin-top:5px}.aboutMark{font-size:34px;font-weight:950;letter-spacing:4px;padding:20px 15px 4px}.aboutCopy{padding:0 15px;font-size:12px;line-height:19px;color:#888}.compactUI .bubble{padding:12px}.compactUI .xPost{padding-top:9px;padding-bottom:9px}.reduceMotion *, .reduceMotion *:before, .reduceMotion *:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+
+
+/* v0.31 — social functionality + backend-ready demo/live boundary */
+.dmRow.filteredOut{display:none}.dmEmpty{padding:34px 18px;text-align:center;color:#666;font-size:12px}.dmEmpty b{display:block;color:#ddd;font-size:17px;margin-bottom:6px}
+.notifRow{cursor:pointer;position:relative}.notifRow.unread{background:#0b0b0b}.notifRow.unread:after{content:"";position:absolute;right:14px;top:18px;width:6px;height:6px;border-radius:50%;background:#e8e8e8}.notifRow:active{background:#101010}.notifEmpty{padding:50px 20px;text-align:center;color:#666}.notifEmpty b{display:block;color:#ddd;font-size:18px;margin-bottom:6px}
+.profileEditLayer,.pnSheet{display:none;position:absolute;inset:0;z-index:60;background:#050505;flex-direction:column}.profileEditLayer.show,.pnSheet.show{display:flex}.pnSheetScrim{position:absolute;inset:0;background:rgba(0,0,0,.58)}.pnSheetCard{position:absolute;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));max-height:76%;overflow:auto;background:#0b0b0b;border:1px solid #292929;border-radius:22px;padding:16px}.pnSheetHead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.pnSheetHead b{font-size:17px}.pnSheetClose{width:34px;height:34px;border:1px solid #2b2b2b;border-radius:50%;display:grid;place-items:center;color:#aaa;font-size:20px;cursor:pointer}.pnForm{padding:8px 15px 24px}.pnField{margin:14px 0}.pnField label{display:block;color:#646464;font-size:10px;font-weight:850;letter-spacing:.7px;margin-bottom:6px}.pnField input,.pnField textarea{width:100%;border:1px solid #272727;border-radius:13px;background:#0d0d0d;color:#eee;padding:11px 12px;outline:0;font:inherit}.pnField textarea{min-height:86px;resize:vertical}.pnPrimary{border:0;border-radius:999px;background:#eee;color:#090909;padding:10px 16px;font-weight:900;cursor:pointer}.pnSecondary{border:1px solid #303030;border-radius:999px;background:#0c0c0c;color:#ddd;padding:9px 14px;font-weight:850;cursor:pointer}.profileStatLink{cursor:pointer}.profileStatLink:active{opacity:.65}
+.connectionsLayer{display:none;position:absolute;inset:0;z-index:55;background:#050505;flex-direction:column}.connectionsLayer.show{display:flex}.connectionRow{display:flex;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid #171717}.connectionCopy{flex:1;min-width:0}.connectionCopy b{font-size:13px}.connectionCopy small{display:block;color:#666;margin-top:2px}.connectionEmpty{padding:44px 20px;text-align:center;color:#666}.connectionEmpty b{display:block;color:#ddd;font-size:17px;margin-bottom:6px}
+.pnAction{cursor:pointer;user-select:none}.pnAction.on{color:#eee}.pnAction.likeOn{color:#f28}.pnAction.repostOn{color:#8fd}.pnAction:active{transform:scale(.96)}
+.profileLocalPost{padding:13px 14px;border-bottom:1px solid #171717;display:flex;gap:10px}.profileLocalPost .xPostBody{flex:1}.profileEmpty{padding:48px 20px;text-align:center;color:#666}.profileEmpty b{display:block;color:#ddd;font-size:18px;margin-bottom:6px}
+.liveDataEmpty{display:none;flex:1;min-height:300px;place-items:center;text-align:center;padding:36px;color:#676767}.liveDataEmpty b{display:block;color:#ddd;font-size:19px;margin-bottom:7px}.liveDataEmpty small{display:block;max-width:280px;line-height:17px}.app[data-content-mode="live"] .ticker,.app[data-content-mode="live"] .pulseWrap,.app[data-content-mode="live"] .streamLabel,.app[data-content-mode="live"] #feed>[data-demo-content="true"]{display:none!important}.app[data-content-mode="live"] .liveDataEmpty{display:grid}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="status"><span class="clock">9:41</span><span>5G ▰</span></div>
+
+  <!-- PNGEA CORE — HOME FEED. Preserve structure/visual language unless product direction explicitly changes. -->
+  <section class="screen active" id="Home">
+    <div class="top"><div class="avatar small" id="youButton">YOU</div><div class="searchBtn" data-screen="Search" aria-label="Search">⌕</div><div style="width:34px;height:34px" aria-hidden="true"></div></div>
+    <div class="ticker"><div class="tickerTrack" id="tickerTrack">
+      <span class="tickerItem" data-screen="Now"><b class="tickerLabel">NEWS</b><span>Transit workers reach a tentative agreement after overnight talks</span></span>
+      <span class="tickerItem you" data-screen="Inbox"><b class="tickerLabel">YOU</b><span><span class="tickerStrong">2 replies</span> · 1 mention · 4 new followers</span></span>
+      <span class="tickerItem"><b class="tickerLabel">SPORTS</b><span>Two teams you follow play tonight</span></span>
+      <span class="tickerItem"><b class="tickerLabel">TIME</b><span class="tickerTime"></span></span>
+      <span class="tickerItem"><b class="tickerLabel">MARKETS</b><span>VOO ▲ 0.4% · AAPL ▼ 0.2%</span></span>
+      <span class="tickerItem"><b class="tickerLabel">LIVE</b><span>3 creators you follow are broadcasting now</span></span>
+      <span class="tickerItem" data-screen="Now"><b class="tickerLabel">NEWS</b><span>Transit workers reach a tentative agreement after overnight talks</span></span>
+      <span class="tickerItem you" data-screen="Inbox"><b class="tickerLabel">YOU</b><span><span class="tickerStrong">2 replies</span> · 1 mention · 4 new followers</span></span>
+      <span class="tickerItem"><b class="tickerLabel">SPORTS</b><span>Two teams you follow play tonight</span></span>
+      <span class="tickerItem"><b class="tickerLabel">TIME</b><span class="tickerTime"></span></span>
+      <span class="tickerItem"><b class="tickerLabel">MARKETS</b><span>VOO ▲ 0.4% · AAPL ▼ 0.2%</span></span>
+      <span class="tickerItem"><b class="tickerLabel">LIVE</b><span>3 creators you follow are broadcasting now</span></span>
+    </div></div>
+
+    <div class="feed" id="feed">
+      <div class="pulseWrap"><div class="sectionLine"><b>PULSE</b><span>what the app is paying attention to</span></div><div class="pulse">
+        <div class="pulseChip" data-screen="Now"><b>TRANSIT DEAL</b><span>611K</span></div><div class="pulseChip"><b>FILM FESTIVAL</b><span>188K</span></div><div class="pulseChip"><b>LABOR DATA</b><span>143K</span></div><div class="pulseChip"><b>OPENING NIGHT</b><span>97K</span></div>
+      </div></div>
+      <div class="streamLabel"><b>THE STREAM</b><span>everything, in one place</span></div>
+
+      <article class="breaking">
+        <div class="breakTicker"><div class="breakTrack"><span>BREAKING NEWS • BREAKING NEWS • BREAKING NEWS • BREAKING NEWS • BREAKING NEWS •</span></div></div>
+        <div class="breakInner"><div class="authorRow"><div class="avatar">DD</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">The Dispatch Desk</span><span class="verified">◆</span></div><span class="meta">@dispatch · 8m</span></div><span class="more">•••</span></div><div class="breakTopic">LABOR</div><div class="breakTitle">Transit workers reach a tentative agreement.</div><div class="breakBody">Negotiators announced the deal after an overnight bargaining session. Ratification details are expected later today.</div><div class="actions"><span>◯ 421</span><span class="action">⇄ 3.2K</span><span class="action like">♡ 18.1K</span><span>↗</span></div></div>
+      </article>
+
+      <article class="bubble"><div class="authorRow"><div class="avatar">MC</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">Maya Chen</span><span class="verified">◆</span></div><span class="meta">@mayachen · 4m</span></div><span class="more">•••</span></div><div class="eyebrow">TECHNOLOGY</div><div class="body">A social network should let you choose the algorithm you want — not quietly choose your worldview for you.</div><div class="actions"><span>◯ 184</span><span class="action">⇄ 1.2K</span><span class="action like">♡ 9.4K</span><span>↗</span></div></article>
+
+      <article class="edgePost"><div class="edgeVisual photo"><span class="ghost">PHOTO</span></div><div class="edgeMeta"><div class="authorRow"><div class="avatar">AL</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">Ari Lewis</span></div><span class="meta">@arilewis · 18m</span></div><span class="more">•••</span></div><div class="caption">Downtown just before the rain.</div><div class="actions"><span>◯ 77</span><span class="action">⇄ 118</span><span class="action like">♡ 2.3K</span><span>↗</span></div></div></article>
+
+      <article class="edgePost"><div class="edgeVisual short" data-open-post="short"><span class="ghost">MOTION</span><div class="playCircle">▶</div><span class="duration">0:32</span></div><div class="edgeMeta"><div class="authorRow"><div class="avatar">JR</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">Jules Rivera</span><span class="verified">◆</span></div><span class="meta">@jules · 26m</span></div><span class="more">•••</span></div><div class="caption">Thirty seconds from the picket line this morning.</div><div class="actions"><span>◯ 330</span><span class="action">⇄ 2.6K</span><span class="action like">♡ 21K</span><span>↗</span></div></div></article>
+
+      <article class="longVideo" data-screen="Video"><div class="thumb"><span class="ghost">FEATURE</span><div class="playCircle">▶</div><span class="duration">24:18</span></div><div class="longMeta"><div class="avatar">FF</div><div style="flex:1"><div class="videoTitle">Why the 1970s newsroom thriller suddenly feels modern again</div><div class="videoMeta">Frame by Frame · 782K views · 1h ago</div></div><span class="more">•••</span></div></article>
+
+      <article class="bubble"><div class="authorRow"><div class="avatar">LC</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">Labor Channel</span><span class="verified">◆</span><span class="liveIdentity"><i class="liveDot"></i><span class="liveText">LIVE</span></span></div><span class="meta">@laborchannel · now</span></div><span class="more">•••</span></div><div class="eyebrow">LIVE EVENT</div><div class="liveTitle">Union members react to the tentative deal</div><div class="body">Live from outside the bargaining hall.</div><div class="livePreview"><div class="watching"><i class="liveDot"></i> 18.2K WATCHING</div><strong>LIVE</strong></div><div class="actions"><span>◯ 1.1K</span><span class="action">⇄ 4.9K</span><span class="action like">♡ 31K</span><span>↗</span></div></article>
+
+      <article class="bubble"><div data-screen="Article"><div class="authorRow"><div class="avatar">AK</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">Amara King</span><span class="verified">◆</span></div><span class="meta">@amaraking · 2h</span></div><span class="more">•••</span></div><div class="eyebrow">LONG FORM</div><div class="longTitle">The social feed should be infrastructure, not a collection of apps</div><div class="readPrompt">READ THE FULL POST ›</div></div><div class="actions"><span>◯ 913</span><span class="action">⇄ 6.8K</span><span class="action like">♡ 44K</span><span>↗</span></div></article>
+    </div>
+  </section>
+
+  <!-- PNGEA SCAFFOLD — conventional social infrastructure. Safe to iterate rapidly. -->
+  <section class="screen" id="Search">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>Search</b></div><div class="xAction" data-screen="Settings" aria-label="Search settings">⚙</div></div>
+  <div class="searchHero"><div class="searchPill" id="searchPill"><span>⌕</span><input id="globalSearchInput" autocomplete="off" placeholder="Search PNGEA"><button class="searchClear" id="searchClear" aria-label="Clear search">×</button></div></div>
+  <div class="searchRecent" id="searchRecent"></div>
+  <div class="xTabs" data-tab-group="search"><div class="xTab active" data-tab="s-for-you">For you</div><div class="xTab" data-tab="s-trending">Trending</div><div class="xTab" data-tab="s-people">People</div><div class="xTab" data-tab="s-media">Media</div></div>
+  <div class="xScroll" id="searchScroll">
+    <div class="xPanel active" id="s-for-you"></div>
+    <div class="xPanel" id="s-trending"></div>
+    <div class="xPanel" id="s-people"></div>
+    <div class="xPanel" id="s-media"></div>
+  </div>
+</section>
+
+  <section class="screen" id="Now"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle" style="display:flex;align-items:center;gap:7px"><i class="dot"></i>NOW</span><span style="width:34px"></span></div><div class="scroller"><div class="nowHuge">WHAT'S MOVING</div><div class="story"><span class="storyNum">01</span><div class="storyCopy"><b>Transit workers reach tentative agreement</b><small>611K posts · updating</small></div><span class="arrow">›</span></div><div class="story"><span class="storyNum">02</span><div class="storyCopy"><b>Film festival lineup begins rolling out</b><small>188K posts · updating</small></div><span class="arrow">›</span></div><div class="story"><span class="storyNum">03</span><div class="storyCopy"><b>Markets react to new labor data</b><small>143K posts · updating</small></div><span class="arrow">›</span></div><div class="story"><span class="storyNum">04</span><div class="storyCopy"><b>Opening night reactions spread</b><small>97K posts · updating</small></div><span class="arrow">›</span></div></div></section>
+
+  <section class="screen" id="Inbox">
+  <div class="xTop"><div class="xTopTitle"><b>Messages</b></div><div class="xAction">⚙</div><div class="xAction">✎</div></div>
+  <div class="dmSearch"><span>⌕</span><input placeholder="Search direct messages"></div>
+  <div class="xScroll">
+    <div class="dmRow" data-dm="alex"><div class="xAvatar">AR</div><div class="dmCopy"><div class="dmLine"><b>Alex Rivera</b><span>@alexrivera</span><span class="dmTime">2m</span></div><div class="dmPreview">That PNGEA message icon finally looks right.</div></div><span class="unreadDot"></span></div>
+    <div class="dmRow" data-dm="maya"><div class="xAvatar">MK</div><div class="dmCopy"><div class="dmLine"><b>Maya Kim</b><span>@mayak</span><span class="dmTime">1h</span></div><div class="dmPreview">Send me the film review when you post it.</div></div></div>
+    <div class="dmRow" data-dm="crew"><div class="xAvatar">5</div><div class="dmCopy"><div class="dmLine"><b>Launch Crew</b><span>5 people</span><span class="dmTime">6h</span></div><div class="dmPreview">Jordan: the sidebar is ready for another pass</div></div></div>
+    <div class="dmRow" data-dm="news"><div class="xAvatar">NW</div><div class="dmCopy"><div class="dmLine"><b>Nia Wells</b><span>@niawells</span><span class="dmTime">Sun</span></div><div class="dmPreview">You: sounds good, I’ll check it tonight</div></div></div>
+  </div>
+</section>
+  <section class="screen" id="Notifications">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>Notifications</b></div><div class="xAction">⚙</div></div>
+  <div class="xTabs" data-tab-group="notifications"><div class="xTab active" data-tab="n-all">All</div><div class="xTab" data-tab="n-mentions">Mentions</div></div>
+  <div class="xScroll">
+    <div class="xPanel active" id="n-all">
+      <div class="notifRow"><div class="notifGlyph">♡</div><div class="notifCopy"><div class="notifText"><b>Maya Kim</b> and 18 others liked your post.</div><div class="notifSub">“The feed should feel like one continuous public square...”</div></div></div>
+      <div class="notifRow"><div class="notifGlyph">↗</div><div class="notifCopy"><div class="notifText"><b>Alex Rivera</b> reposted you.</div><div class="notifSub">12m</div></div></div>
+      <div class="notifRow"><div class="notifGlyph">@</div><div class="notifCopy"><div class="notifText"><b>Nia Wells</b> mentioned you.</div><div class="notifQuote">@you that new message animation is extremely clean</div><div class="notifSub">43m</div></div></div>
+      <div class="notifRow"><div class="notifGlyph">●</div><div class="notifCopy"><div class="notifText"><b>NOW:</b> City council press conference is live.</div><div class="notifSub">1h</div></div></div>
+      <div class="notifRow"><div class="notifGlyph">+</div><div class="notifCopy"><div class="notifText"><b>Jordan Blake</b> followed you.</div><div class="notifSub">3h</div></div></div>
+    </div>
+    <div class="xPanel" id="n-mentions"><div class="notifRow"><div class="notifGlyph">@</div><div class="notifCopy"><div class="notifText"><b>Nia Wells</b> mentioned you.</div><div class="notifQuote">@you that new message animation is extremely clean</div><div class="notifSub">43m</div></div></div></div>
+  </div>
+</section>
+  <section class="screen" id="Profile">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>You</b><small>1,842 posts</small></div><div class="xAction">•••</div></div>
+  <div class="xScroll">
+    <div class="profileCover"></div>
+    <div class="profileHead">
+      <div class="profileAvatarRow"><div class="xAvatar big">YOU</div><div class="profileEdit">Edit profile</div></div>
+      <div class="profileName">You</div><div class="profileHandle">@you</div>
+      <div class="profileBio">Building PNGEA. Media, ideas, film, politics, and whatever else is worth putting into the world.</div>
+      <div class="profileMeta"><span>◎ Columbus, OH</span><span>⌁ pngea.app</span><span>◷ Joined 2026</span></div>
+      <div class="profileStats"><span><b>241</b>Following</span><span><b>1,842</b>Followers</span></div>
+    </div>
+    <div class="xTabs" data-tab-group="profile"><div class="xTab active" data-tab="p-posts">Posts</div><div class="xTab" data-tab="p-replies">Replies</div><div class="xTab" data-tab="p-media">Media</div><div class="xTab" data-tab="p-likes">Likes</div></div>
+    <div class="xPanel active" id="p-posts">
+      <div class="xPost"><div class="xAvatar">YOU</div><div class="xPostBody"><div class="xPostWho"><b>You</b><span>@you · 12m</span></div><div class="xPostText">The feed should feel like one continuous public square, not six apps stapled together.</div><div class="xPostActions"><span>◯ 18</span><span>⇄ 41</span><span>♡ 291</span><span>↗</span></div></div></div>
+      <div class="xPost"><div class="xAvatar">YOU</div><div class="xPostBody"><div class="xPostWho"><b>You</b><span>@you · 4h</span></div><div class="xPostText">Testing a different visual language for messages.</div><div class="xPostMedia">PNGEA</div><div class="xPostActions"><span>◯ 32</span><span>⇄ 66</span><span>♡ 517</span><span>↗</span></div></div></div>
+    </div>
+    <div class="xPanel" id="p-replies"><div class="placeholder"><div><h2>Replies</h2><p>Your replies will populate here.</p></div></div></div>
+    <div class="xPanel" id="p-media"><div class="placeholder"><div><h2>Media</h2><p>Photos and video from your posts.</p></div></div></div>
+    <div class="xPanel" id="p-likes"><div class="placeholder"><div><h2>Likes</h2><p>Posts you have liked.</p></div></div></div>
+  </div>
+</section>
+  <section class="screen" id="Saved"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Saved</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Saved</h2><p>Posts, videos, articles, and threads you want to come back to.</p></div></div></section>
+  <section class="screen" id="Communities">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>Communities</b></div><div class="xAction">⌕</div><div class="xAction">+</div></div>
+  <div class="xTabs" data-tab-group="communities"><div class="xTab active" data-tab="c-yours">Yours</div><div class="xTab" data-tab="c-discover">Discover</div></div>
+  <div class="xScroll">
+    <div class="xPanel active" id="c-yours">
+      <div class="communityCard"><div class="communityBanner"></div><div class="communityInner"><div class="communityTitle">Film People</div><div class="communityMeta">42.8K members</div><div class="communityDesc">Directors, writers, critics, cinematographers, and people who simply watch too many movies.</div></div></div>
+      <div class="communityCard"><div class="communityBanner"></div><div class="communityInner"><div class="communityTitle">Columbus</div><div class="communityMeta">18.2K members</div><div class="communityDesc">News, events, development, culture, and life around central Ohio.</div></div></div>
+    </div>
+    <div class="xPanel" id="c-discover"><div class="communityCard"><div class="communityBanner"></div><div class="communityInner"><div class="communityTitle">Design Systems</div><div class="communityMeta">91K members</div><div class="communityDesc">Interface design, product systems, motion, and visual language.</div><div class="communityJoin">Join</div></div></div></div>
+  </div>
+</section>
+  <section class="screen" id="History">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>History</b><small>Recently viewed</small></div><div class="xAction">•••</div></div>
+  <div class="xScroll">
+    <div class="historyRow"><div class="historyThumb">▶</div><div class="historyCopy"><b>Why the studio system is changing again</b><p>Video · watched 18 minutes ago</p></div></div>
+    <div class="historyRow"><div class="historyThumb">TXT</div><div class="historyCopy"><b>The social feed should be infrastructure</b><p>Long form · opened 1 hour ago</p></div></div>
+    <div class="historyRow"><div class="historyThumb">LIVE</div><div class="historyCopy"><b>City council press conference</b><p>Live · watched 3 hours ago</p></div></div>
+    <div class="historyRow"><div class="historyThumb">⌕</div><div class="historyCopy"><b>Search: “broadcast design”</b><p>Search · yesterday</p></div></div>
+  </div>
+</section>
+  <section class="screen" id="CloseFriends"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Close Friends</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Close Friends</h2><p>Your private circle for posts, stories, live streams, and conversations.</p></div></div></section>
+  <section class="screen" id="Wallet"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Wallet</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Wallet</h2><p>Payments, balances, transfers, purchases, creator earnings, and subscriptions.</p></div></div></section>
+  <section class="screen" id="Shop"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Shop</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Shop</h2><p>Products, creator drops, media, tickets, and storefronts inside PNGEA.</p></div></div></section>
+  <section class="screen" id="Live"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">NOW</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>NOW</h2><p>Live streams, breaking events, broadcasts, spaces, and what is happening this second.</p></div></div></section>
+  <section class="screen" id="Dating"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Dating</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Dating</h2><p>PNGEA's opt-in dating layer.</p></div></div></section>
+  <section class="screen" id="AIBot"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">AI</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>AI</h2><p>The in-app assistant. Name and identity still TBD.</p></div></div></section>
+  <section class="screen" id="Activity"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Your activity</span><span style="width:34px"></span></div><div class="placeholder"><div><h2>Your activity</h2><p>Your likes, replies, reposts, live activity, and viewing history.</p></div></div></section>
+  <section class="screen" id="Settings">
+  <div class="xTop"><span class="xBack" data-screen="Home">‹</span><div class="xTopTitle"><b>Settings</b></div></div>
+  <div class="xScroll">
+    <div class="settingsGroup"><div class="settingsLabel">YOUR ACCOUNT</div><div class="settingsRow" data-setting-page="account"><i>○</i><b>Account information</b><span>›</span></div><div class="settingsRow" data-setting-page="security"><i>⌁</i><b>Security and access</b><span>›</span></div><div class="settingsRow" data-setting-page="privacy"><i>◉</i><b>Privacy and safety</b><span>›</span></div></div>
+    <div class="settingsGroup"><div class="settingsLabel">EXPERIENCE</div><div class="settingsRow" data-setting-page="display"><i>☼</i><b>Display and accessibility</b><span>›</span></div><div class="settingsRow" data-setting-page="notifications"><i>◌</i><b>Notifications</b><span>›</span></div><div class="settingsRow" data-setting-page="feed"><i>≋</i><b>Feed preferences</b><span>›</span></div></div>
+    <div class="settingsGroup"><div class="settingsLabel">ABOUT</div><div class="settingsRow" data-setting-page="help"><i>?</i><b>Help center</b><span>›</span></div><div class="settingsRow" data-setting-page="about"><i>i</i><b>About PNGEA</b><span>›</span></div></div>
+  </div>
+  <div class="settingsDetail" id="settingsDetail">
+    <div class="xTop"><span class="xBack" id="settingsBack">‹</span><div class="xTopTitle"><b id="settingsDetailTitle">Settings</b></div></div>
+    <div class="settingsDetailScroll" id="settingsDetailBody"></div>
+  </div>
+</section>
+
+  <section class="screen" id="Video"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Video</span><span class="more">•••</span></div><div class="scroller"><div class="watchPlayer"><div class="playCircle">▶</div></div><div class="watchInfo"><div class="watchTitle">Why the 1970s newsroom thriller suddenly feels modern again</div><div class="videoMeta" style="margin-top:7px">782K views · 1 hour ago</div><div class="creatorLine"><div class="avatar">FF</div><div class="creatorText"><b>Frame by Frame</b><small>@framebyframe · 1.9M followers</small></div><div class="likePill">👍 68K</div></div></div><div class="commentRail"><div class="commentRailLabel">COMMENTS ARE ALREADY OPEN</div><div class="commentCards"><div class="commentBubble"><b>TOP COMMENT</b><p>That comparison to television news language is exactly what I was thinking.</p><small>@mina · 9.8K likes</small></div><div class="commentBubble live"><b style="color:#ff6767">LIVE COMMENTS</b><p>Everyone pausing at the same frame right now 😭</p><small>@jacob · just now</small></div><div class="commentBubble"><b>TOP COMMENT</b><p>The production design breakdown alone is worth the watch.</p><small>@cass · 6.1K likes</small></div></div></div><div class="commentRow"><div class="avatar small">M</div><div class="text"><b>@mina</b><p>Really good distinction between a movie feeling old and a movie using an older visual language on purpose.</p><small>♡ 9.8K</small></div></div><div class="commentRow"><div class="avatar small">R</div><div class="text"><b>@ruben</b><p>This app opening comments immediately under video makes so much more sense.</p><small>♡ 4.2K</small></div></div></div></section>
+
+  <section class="screen" id="Article"><div class="simpleTop"><span class="back" data-screen="Home">‹</span><span class="pageTitle">Post</span><span class="more">•••</span></div><div class="scroller"><article class="article"><div class="articleKicker">MEDIA · LONG FORM</div><div class="articleTitle">The social feed should be infrastructure, not a collection of apps</div><div class="byline"><div class="avatar">AK</div><div><b>Amara King</b><small class="meta">@amaraking · 2h</small></div></div><div class="articleBody">The internet taught people to divide expression by format. Text went one place, photographs another, short video somewhere else, and long video somewhere else again.<br><br>That structure made sense when each medium needed its own technology. It makes less sense when the same phone can create all of them instantly.<br><br>A modern social feed should not begin by asking what kind of media you are making. It should begin with a blank space and let the act of creation define the format. The interface can then adapt around what you made.<br><br>That is the point of one stream: not to flatten every medium into the same card, but to let every medium keep its own strengths while removing the walls between them.</div><div class="articleEnd">Discussion, reposts and quote reposts stay attached to the title card on Home.</div></article></div></section>
+
+  <!-- PNGEA CORE — BOTTOM NAV + custom icons. Do not replace with scaffold UI. -->
+  <div class="bottom" id="bottom">
+    <div class="nav active" data-screen="Home" aria-label="Home">
+      <svg class="navIcon homeIcon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="homeShape" d="M16 54V31H10L20 21.5V11H27V14.8L32 10L54 31H48V54Z"/>
+        <rect class="homeWindow" x="21" y="37" width="10" height="10" rx="0.7"/>
+        <path class="homeCross" d="M26 37V47M21 42H31"/>
+        <rect class="homeDoor" x="36" y="34" width="10" height="20" rx="0.7"/>
+      </svg>
+    </div>
+    <div class="nav" data-screen="Inbox" aria-label="Messages">
+      <span class="messageIcon3D" aria-hidden="true">
+        <svg class="messageBubbleSvg" viewBox="0 0 64 64">
+          <path class="messageBubbleStroke" d="M32 7.5C18.2 7.5 7 17.7 7 30.2c0 11.9 9.8 21.7 22.5 22.7L32 58l3.1-5.1C47.5 51.4 57 41.8 57 30.2 57 17.7 45.8 7.5 32 7.5Z"/>
+        </svg>
+        <canvas class="messageGlobeCanvas" width="76" height="76"></canvas>
+      </span>
+    </div>
+    <div class="nav hasNotifications" data-screen="Notifications" aria-label="Notifications">
+      <span class="notificationBeacon" aria-hidden="true"><i class="beaconCore"></i></span>
+    </div>
+  </div>
+  <div class="compose" id="compose">+</div>
+
+  <div class="sidebarShade" id="sidebarShade"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sideTop">
+      <div class="sideTopRow"><div class="sideAvatar">YOU</div><div class="sideClose" id="sideClose">×</div></div>
+      <div class="sideName">You</div><div class="sideHandle">@you</div>
+      <div class="sideStats"><span class="sideStat"><b>241</b>Following</span><span class="sideStat"><b>1,842</b>Followers</span></div>
+    </div>
+    <div class="sideMenu">
+      <div class="sideMenuMain">
+        <div class="sideItem" data-side-screen="Profile"><span class="sideIcon">○</span><span class="sideText">Profile</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="History"><span class="sideIcon">↺</span><span class="sideText">History</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="Communities"><span class="sideIcon">◎</span><span class="sideText">Communities</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="CloseFriends"><span class="sideIcon">♡</span><span class="sideText">Close Friends</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="Wallet"><span class="sideIcon">▣</span><span class="sideText">Wallet</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="Shop"><span class="sideIcon">◇</span><span class="sideText">Shop</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="Live"><span class="sideIcon">◉</span><span class="sideText sideNow"><span class="sideNowDot"></span>NOW</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="Dating"><span class="sideIcon">♥</span><span class="sideText">Dating</span><span class="sideArrow">›</span></div>
+        <div class="sideItem" data-side-screen="AIBot"><span class="sideIcon">✦</span><span class="sideText">AI</span><span class="sideSub">NAME TBD</span><span class="sideArrow">›</span></div>
+      </div>
+      <div class="sideDivider"></div>
+      <div class="sideItem sideSettings" data-side-screen="Settings"><span class="sideIcon">⚙</span><span class="sideText">Settings</span><span class="sideArrow">›</span></div>
+    </div>
+    <div class="sideFoot"><div class="sideAccount"><span class="sideMini">YOU</span><span>@you</span></div><span>Switch account</span></div>
+  </aside>
+
+
+  <div class="dmThread" id="dmThread">
+    <div class="xTop"><span class="xBack" id="dmBack">‹</span><div class="xAvatar">AR</div><div class="xTopTitle"><b id="dmTitle">Alex Rivera</b><small id="dmHandle">@alexrivera</small></div><div class="xAction">ⓘ</div></div>
+    <div class="dmMessages" id="dmMessages"><div class="msgDay">TODAY</div><div class="msgBubble them">That PNGEA message icon finally looks right.</div><div class="msgBubble me">Finally. Keeping the globe.</div><div class="msgBubble them">Good. Don’t touch it again.</div></div>
+    <div class="dmCompose"><input id="dmInput" placeholder="Start a message"><button id="dmSend">↑</button></div>
+  </div>
+
+  <div class="uiToast" id="uiToast" role="status" aria-live="polite"></div>
+
+  <!-- PNGEA CORE — COMPOSER. Functionality may evolve; visual identity stays protected. -->
+  <div class="composerLayer" id="composerLayer"><div class="status"><span class="clock">9:41</span><span>5G ▰</span></div><div class="composerTop"><span class="close" id="closeComposer">×</span><span class="detected" id="detected">ANYTHING</span><button class="send" id="send" disabled>↑</button></div><div class="canvas"><textarea id="postText" placeholder="Put something out there…"></textarea><div class="attachPreview" id="attachPreview"><small id="previewType">PHOTO</small><b id="previewTitle">Photo attached</b><button id="removeAttach">Remove</button></div></div><div class="capture"><div class="captureHint">TYPE, PASTE, OR CAPTURE</div><div class="captureRow"><div class="cap" data-attach="photo"><b>◉</b><span>Camera</span></div><div class="cap" data-attach="video"><b>▷</b><span>Video</span></div><div class="cap" data-attach="voice"><b>≋</b><span>Speak</span></div><div class="cap" data-attach="link"><b>⌁</b><span>Link</span></div></div></div></div>
+</div>
+<script>
+/* PNGEA FOUNDATION v1.1
+   Product core is protected; conventional app infrastructure can be replaced/extended freely. */
+const screens=[...document.querySelectorAll('.screen')];
+const bottom=document.getElementById('bottom');
+const sidebar=document.getElementById('sidebar');
+const sidebarShade=document.getElementById('sidebarShade');
+const youButton=document.getElementById('youButton');
+const uiToast=document.getElementById('uiToast');
+
+const PNGEA_ROUTES={
+  Home:'home', Search:'search', Inbox:'messages', Notifications:'notifications', Profile:'profile',
+  History:'history', Communities:'communities', CloseFriends:'close-friends', Wallet:'wallet', Shop:'shop',
+  Now:'now', Dating:'dating', AI:'ai', Settings:'settings', Activity:'activity', Video:'video', Article:'article'
+};
+const ROUTE_TO_SCREEN=Object.fromEntries(Object.entries(PNGEA_ROUTES).map(([k,v])=>[v,k]));
+const STORAGE_KEY='pngea.appState.v1';
+const DEFAULT_STATE={
+  version:1,
+  user:{id:'you',name:'You',handle:'@you'},
+  settings:{appearance:'dark',notifications:true,messageNotifications:true,mentionNotifications:true,followNotifications:true,autoplay:true,reducedMotion:false,compactUI:false,feedMode:'balanced',personalizedFeed:true,privateAccount:false,readReceipts:true,discoverability:true},
+  social:{following:[],likedPosts:[]},
+  search:{history:[]},
+  posts:[],
+  messages:{
+    alex:[{from:'them',text:'That PNGEA message icon finally looks right.'},{from:'me',text:'Finally. Keeping the globe.'},{from:'them',text:'Good. Don’t touch it again.'}],
+    maya:[{from:'them',text:'Send me the film review when you post it.'}],
+    crew:[{from:'them',text:'Jordan: the sidebar is ready for another pass'}],
+    news:[{from:'me',text:'sounds good, I’ll check it tonight'}]
+  }
+};
+function cloneDefault(){return JSON.parse(JSON.stringify(DEFAULT_STATE))}
+function loadState(){
+  const base=cloneDefault();
+  try{
+    const raw=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');
+    if(!raw||typeof raw!=='object') return base;
+    return {
+      ...base,...raw,
+      user:{...base.user,...(raw.user||{})},
+      settings:{...base.settings,...(raw.settings||{})},
+      social:{...base.social,...(raw.social||{})},
+      search:{...base.search,...(raw.search||{})},
+      messages:{...base.messages,...(raw.messages||{})},
+      posts:Array.isArray(raw.posts)?raw.posts:[]
+    };
+  }catch{return base}
+}
+const appState=loadState();
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(appState))}catch{}}
+function toast(text){if(!uiToast)return;uiToast.textContent=text;uiToast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>uiToast.classList.remove('show'),1500)}
+
+function routeFor(screen,detail){
+  const base=PNGEA_ROUTES[screen]||'home';
+  return '#/'+base+(detail?'/'+encodeURIComponent(detail):'');
+}
+function parseRoute(){
+  const raw=(location.hash||'#/home').replace(/^#\/?/,'');
+  const parts=raw.split('/').filter(Boolean).map(decodeURIComponent);
+  return {screen:ROUTE_TO_SCREEN[parts[0]]||'Home',detail:parts[1]||null};
+}
+function renderScreen(id,{resetHomeScroll=false}={}){
+  if(!document.getElementById(id)) id='Home';
+  screens.forEach(s=>s.classList.toggle('active',s.id===id));
+  bottom.style.display=['Home','Inbox','Notifications'].includes(id)?'flex':'none';
+  document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.screen===id));
+  if(id==='Home'&&resetHomeScroll){const f=document.getElementById('feed');if(f)f.scrollTop=0}
+}
+function navigate(screen,detail=null,{replace=false}={}){
+  const hash=routeFor(screen,detail);
+  if(location.hash===hash){applyRoute();return}
+  if(replace) history.replaceState(null,'',hash); else history.pushState(null,'',hash);
+  applyRoute();
+}
+function openScreen(id,opts={}){navigate(id,null,opts)}
+function applyRoute(){
+  const route=parseRoute();
+  renderScreen(route.screen);
+  closeSidebar();
+  if(window.PNGEA?.renderThreadRoute) window.PNGEA.renderThreadRoute(route);
+  if(window.PNGEA?.renderSettingsRoute) window.PNGEA.renderSettingsRoute(route);
+}
+window.addEventListener('popstate',applyRoute);
+window.addEventListener('hashchange',applyRoute);
+
+document.querySelectorAll('[data-screen]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();navigate(el.dataset.screen)}));
+function openSidebar(){sidebar.classList.add('show');sidebarShade.classList.add('show')}
+function closeSidebar(){sidebar.classList.remove('show');sidebarShade.classList.remove('show')}
+youButton.addEventListener('click',openSidebar);
+document.getElementById('sideClose').addEventListener('click',closeSidebar);
+sidebarShade.addEventListener('click',closeSidebar);
+document.querySelectorAll('[data-side-screen]').forEach(el=>el.addEventListener('click',()=>navigate(el.dataset.sideScreen)));
+let sideTouchX=null;
+sidebar.addEventListener('touchstart',e=>{sideTouchX=e.touches[0].clientX},{passive:true});
+sidebar.addEventListener('touchend',e=>{if(sideTouchX!==null&&e.changedTouches[0].clientX-sideTouchX<-65)closeSidebar();sideTouchX=null},{passive:true});
+
+function tick(){
+  const d=new Date(),date=d.toLocaleDateString([], {weekday:'short',month:'short',day:'numeric'}).toUpperCase(),time=d.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+  document.querySelectorAll('.tickerTime').forEach(x=>x.textContent=`${date} · ${time}`);
+  document.querySelectorAll('.clock').forEach(x=>x.textContent=time)
+}
+tick();setInterval(tick,1000);
+
+document.addEventListener('click',e=>{
+  const x=e.target.closest('.like');
+  if(x){x.classList.toggle('activeAction');x.textContent=x.classList.contains('activeAction')?'♥ liked':'♡ like'}
+});
+
+// Core composer: posts now persist locally so backend wiring can replace storage later without changing UI.
+const layer=document.getElementById('composerLayer'),textarea=document.getElementById('postText'),detected=document.getElementById('detected'),send=document.getElementById('send'),preview=document.getElementById('attachPreview'),ptype=document.getElementById('previewType'),ptitle=document.getElementById('previewTitle');
+let attachment=null;
+document.getElementById('compose').onclick=()=>{layer.classList.add('show');setTimeout(()=>textarea.focus(),80)};
+function detect(){const t=textarea.value.trim();let d='ANYTHING';if(attachment==='photo')d='PHOTO READY';else if(attachment==='video')d='VIDEO READY';else if(attachment==='voice')d='VOICE NOTE READY';else if(attachment==='link'||/https?:\/\//i.test(t))d='LINK PREVIEW READY';else if(t.length>420)d='LONG FORM';else if(t)d='TEXT';detected.textContent=d;send.disabled=!t&&!attachment}
+function resetComposer(){layer.classList.remove('show');textarea.value='';attachment=null;preview.classList.remove('show');detect()}
+document.getElementById('closeComposer').onclick=resetComposer;
+document.getElementById('removeAttach').onclick=()=>{attachment=null;preview.classList.remove('show');detect()};
+textarea.addEventListener('input',detect);
+document.querySelectorAll('[data-attach]').forEach(el=>el.onclick=()=>{attachment=el.dataset.attach;preview.classList.add('show');ptype.textContent=attachment.toUpperCase();ptitle.textContent=attachment==='photo'?'Photo attached':attachment==='video'?'Video attached':attachment==='voice'?'Voice note attached':'Link preview generated';detect()});
+function localPostElement(post){
+  const art=document.createElement('article');art.className='bubble';art.dataset.localPost=post.id;
+  art.innerHTML=`<div class="authorRow"><div class="avatar">YOU</div><div class="authorCopy"><div class="authorNameLine"><span class="authorName">You</span></div><span class="meta">@you · ${post.createdLabel||'now'}</span></div><span class="more">•••</span></div><div class="body"></div><div class="actions"><span>◯ 0</span><span>⇄ 0</span><span class="action like">♡ 0</span><span>↗</span></div>`;
+  art.querySelector('.body').textContent=post.text||({photo:'Shared a photo',video:'Shared a video',voice:'Shared a voice note',link:'Shared a link'}[post.attachment]||'New post');
+  return art;
+}
+function renderLocalPosts(){
+  document.querySelectorAll('[data-local-post]').forEach(n=>n.remove());
+  const feed=document.getElementById('feed'),anchor=document.querySelector('.streamLabel')?.nextSibling;
+  if(!feed)return;
+  [...appState.posts].reverse().forEach(post=>feed.insertBefore(localPostElement(post),anchor||feed.firstChild));
+}
+send.onclick=()=>{
+  const t=textarea.value.trim();if(!t&&!attachment)return;
+  appState.posts.push({id:'p'+Date.now(),text:t,attachment,createdAt:Date.now(),createdLabel:'now'});saveState();renderLocalPosts();resetComposer();navigate('Home');toast('Posted');
+};
+
+function setScreenState(screenId,state,message=''){
+  const screen=document.getElementById(screenId);if(!screen)return;
+  screen.dataset.uiState=state;
+  if(message) screen.dataset.uiMessage=message;
+}
+
+window.PNGEA={
+  state:appState,save:saveState,navigate,openScreen,routeFor,parseRoute,toast,setScreenState,
+  routes:PNGEA_ROUTES,renderThreadRoute:null,renderSettingsRoute:null
+};
+renderLocalPosts();
+if(!location.hash) history.replaceState(null,'',routeFor('Home'));
+applyRoute();
+</script>
+
+
+<script>
+(() => {
+  const canvas = document.querySelector('.messageGlobeCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2, R = 26, cam = 120;
+  const longitudes = 16, latitudes = [-70,-45,-20,0,20,45,70];
+  const axisTilt = 23.5 * Math.PI / 180;
+  const perspectiveTilt = -10 * Math.PI / 180;
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nav = canvas.closest('.nav');
+  let startTime = performance.now();
+
+  function rotY(x,y,z,a){ return [x*Math.cos(a)+z*Math.sin(a), y, -x*Math.sin(a)+z*Math.cos(a)]; }
+  function rotZ(x,y,z,a){ return [x*Math.cos(a)-y*Math.sin(a), x*Math.sin(a)+y*Math.cos(a), z]; }
+  function rotX(x,y,z,a){ return [x, y*Math.cos(a)-z*Math.sin(a), y*Math.sin(a)+z*Math.cos(a)]; }
+  function orient(x,y,z,spin){ [x,y,z]=rotY(x,y,z,spin); [x,y,z]=rotZ(x,y,z,-axisTilt); [x,y,z]=rotX(x,y,z,perspectiveTilt); return [x,y,z]; }
+  function project(x,y,z){ const s = cam/(cam-z); return [cx+x*s, cy+y*s, z]; }
+  function ink(alpha){ return (nav && nav.classList.contains('active')) ? `rgba(8,8,8,${alpha})` : `rgba(255,255,255,${alpha})`; }
+  function drawPath(points, dashed=false){
+    if(points.length<2) return;
+    ctx.beginPath();
+    ctx.setLineDash(dashed ? [1.8,2.2] : []);
+    ctx.moveTo(points[0][0], points[0][1]);
+    for(let i=1;i<points.length;i++) ctx.lineTo(points[i][0], points[i][1]);
+    const avgz = points.reduce((a,p)=>a+p[2],0)/points.length;
+    const depth = (avgz + R)/(2*R);
+    ctx.lineWidth = dashed ? 0.95 : 1.15;
+    ctx.strokeStyle = ink(dashed ? (.16 + .20*depth) : (.42 + .56*depth));
+    ctx.stroke();
+  }
+
+  function traceMeridian(lambda, spin, front){
+    let seg=[];
+    for(let i=0;i<=120;i++){
+      const phi = -Math.PI/2 + (i/120)*Math.PI;
+      let p = orient(R*Math.cos(phi)*Math.cos(lambda), R*Math.sin(phi), R*Math.cos(phi)*Math.sin(lambda), spin);
+      p = project(p[0],p[1],p[2]);
+      const visible = front ? p[2] >= 0 : p[2] < 0;
+      if(visible) seg.push(p); else { if(seg.length>1) drawPath(seg,!front); seg=[]; }
+    }
+    if(seg.length>1) drawPath(seg,!front);
+  }
+  function traceLatitude(deg, spin, front){
+    const rr = R*Math.cos(deg*Math.PI/180), yy = R*Math.sin(deg*Math.PI/180);
+    let seg=[];
+    for(let i=0;i<=140;i++){
+      const th=(i/140)*Math.PI*2;
+      let p = orient(rr*Math.cos(th), yy, rr*Math.sin(th), spin);
+      p = project(p[0],p[1],p[2]);
+      const visible = front ? p[2] >= 0 : p[2] < 0;
+      if(visible) seg.push(p); else { if(seg.length>1) drawPath(seg,!front); seg=[]; }
+    }
+    if(seg.length>1) drawPath(seg,!front);
+  }
+
+  function render(t){
+    const spin = reduced ? 0.82 : ((t-startTime)/22000)*Math.PI*2;
+    const active = nav && nav.classList.contains('active');
+    ctx.clearRect(0,0,W,H);
+
+    if(!active){
+      const glow = ctx.createRadialGradient(cx,cy,4,cx,cy,R+8);
+      glow.addColorStop(0,'rgba(255,255,255,.10)');
+      glow.addColorStop(.65,'rgba(255,255,255,.035)');
+      glow.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(cx,cy,R+7,0,Math.PI*2); ctx.fill();
+    }
+
+    // rear grid, faint but continuous so lines don't vanish halfway
+    for(let j=0;j<longitudes;j++) traceMeridian((j/longitudes)*Math.PI*2, spin, false);
+    for(const deg of latitudes) traceLatitude(deg, spin, false);
+
+    // front grid
+    for(let j=0;j<longitudes;j++) traceMeridian((j/longitudes)*Math.PI*2, spin, true);
+    for(const deg of latitudes) traceLatitude(deg, spin, true);
+
+    ctx.beginPath();
+    ctx.setLineDash([]);
+    ctx.arc(cx,cy,R,0,Math.PI*2);
+    ctx.lineWidth = 1.15;
+    ctx.strokeStyle = active ? 'rgba(8,8,8,.84)' : 'rgba(255,255,255,.80)';
+    ctx.stroke();
+
+    if(!reduced) requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+})();
+</script>
+
+<script>
+(() => {
+  const api=window.PNGEA;
+  if(!api)return;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+  // Generic tabs
+  document.querySelectorAll('.xTabs').forEach(group => {
+    group.querySelectorAll('.xTab').forEach(tab => tab.addEventListener('click', () => {
+      const target=tab.dataset.tab;
+      group.querySelectorAll('.xTab').forEach(t=>t.classList.toggle('active',t===tab));
+      const screen=group.closest('.screen');if(!screen)return;
+      screen.querySelectorAll('.xPanel').forEach(p=>p.classList.toggle('active',p.id===target));
+    }));
+  });
+
+  // Shared follow adapter. Works for static + dynamically-rendered people rows.
+  function isFollowing(handle){return api.state.social.following.includes(handle)}
+  function syncFollowButton(btn){
+    const handle=btn.dataset.handle||btn.dataset.followId;if(!handle)return;
+    const on=isFollowing(handle);btn.textContent=on?'Following':'Follow';
+    btn.style.background=on?'#151515':'#eee';btn.style.color=on?'#eee':'#080808';btn.style.border=on?'1px solid #333':'0';
+  }
+  document.querySelectorAll('.peopleRow').forEach((row,i)=>{
+    const btn=row.querySelector('.followBtn');if(!btn)return;
+    btn.dataset.handle=row.querySelector('small')?.textContent.trim()||`person-${i}`;syncFollowButton(btn);
+  });
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('.followBtn');if(!btn)return;
+    e.stopPropagation();
+    const handle=btn.dataset.handle||btn.dataset.followId;if(!handle)return;
+    const list=api.state.social.following,idx=list.indexOf(handle);
+    if(idx>=0)list.splice(idx,1);else list.push(handle);
+    api.save();document.querySelectorAll('.followBtn').forEach(syncFollowButton);api.toast(idx>=0?'Unfollowed':'Following');
+  });
+
+  // Messages: routed deep-link state + local persistence.
+  const thread=document.getElementById('dmThread');
+  const dmTitle=document.getElementById('dmTitle');
+  const dmHandle=document.getElementById('dmHandle');
+  const dmMessages=document.getElementById('dmMessages');
+  const dmInput=document.getElementById('dmInput');
+  const names={alex:['Alex Rivera','@alexrivera'],maya:['Maya Kim','@mayak'],crew:['Launch Crew','5 people'],news:['Nia Wells','@niawells']};
+  let activeDm=null;
+  function renderThread(key){
+    activeDm=key;const data=names[key]||['Message',''];dmTitle.textContent=data[0];dmHandle.textContent=data[1];
+    dmMessages.innerHTML='<div class="msgDay">TODAY</div>';
+    const msgs=api.state.messages[key]||[];
+    if(!msgs.length){const empty=document.createElement('div');empty.className='uiState';empty.innerHTML='<div><b>No messages yet</b><small>Start the conversation.</small></div>';dmMessages.appendChild(empty)}
+    msgs.forEach(msg=>{const b=document.createElement('div');b.className='msgBubble '+(msg.from==='me'?'me':'them');b.textContent=msg.text;dmMessages.appendChild(b)});
+    dmMessages.scrollTop=dmMessages.scrollHeight;
+  }
+  api.renderThreadRoute=route=>{
+    if(route.screen==='Inbox'&&route.detail){renderThread(route.detail);thread.classList.add('show')}
+    else thread.classList.remove('show');
+  };
+  document.querySelectorAll('[data-dm]').forEach(row=>row.addEventListener('click',()=>api.navigate('Inbox',row.dataset.dm)));
+  document.getElementById('dmBack').addEventListener('click',()=>api.navigate('Inbox'));
+  document.getElementById('dmSend').addEventListener('click',()=>{
+    const text=dmInput.value.trim();if(!text||!activeDm)return;
+    if(!api.state.messages[activeDm])api.state.messages[activeDm]=[];
+    api.state.messages[activeDm].push({from:'me',text,at:Date.now()});api.save();dmInput.value='';renderThread(activeDm);
+  });
+  dmInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('dmSend').click()}});
+
+  // ---------------- SEARCH ----------------
+  const SEARCH_BASE={
+    trends:[
+      {title:'Transit agreement',category:'Politics · Trending',meta:'611K posts'},
+      {title:'Film festival',category:'Film · Trending',meta:'188K posts'},
+      {title:'Labor data',category:'Business & finance',meta:'143K posts'},
+      {title:'Opening night',category:'Entertainment · Trending',meta:'97K posts'},
+      {title:'Design systems',category:'Technology · Trending',meta:'72K posts'}
+    ],
+    people:[
+      {name:'Alex Rivera',handle:'@alexrivera',initials:'AR',bio:'Product design, technology, and cities.'},
+      {name:'Maya Kim',handle:'@mayak',initials:'MK',bio:'Film, photography, and culture.'},
+      {name:'Nia Wells',handle:'@niawells',initials:'NW',bio:'News and public affairs.'},
+      {name:'Amara King',handle:'@amaraking',initials:'AK',bio:'Writing about media and the internet.'},
+      {name:'Frame by Frame',handle:'@framebyframe',initials:'FF',bio:'Movies, craft, and visual storytelling.'}
+    ],
+    posts:[
+      {name:'The Dispatch Desk',handle:'@dispatch',text:'Transit workers reach a tentative agreement after an overnight bargaining session.'},
+      {name:'Amara King',handle:'@amaraking',text:'The social feed should be infrastructure, not a collection of apps.'},
+      {name:'Frame by Frame',handle:'@framebyframe',text:'Why the 1970s newsroom thriller suddenly feels modern again.'},
+      {name:'Labor Channel',handle:'@laborchannel',text:'Union members react to the tentative deal live from outside the bargaining hall.'}
+    ],
+    media:[
+      {title:'Why the 1970s newsroom thriller suddenly feels modern again',meta:'Frame by Frame · Video',kind:'VIDEO'},
+      {title:'Opening night: first reactions',meta:'Film desk · Short video',kind:'CLIP'},
+      {title:'Union members react to the tentative deal',meta:'Labor Channel · Live replay',kind:'LIVE'}
+    ]
+  };
+  const searchInput=document.getElementById('globalSearchInput');
+  const searchPill=document.getElementById('searchPill');
+  const searchClear=document.getElementById('searchClear');
+  const searchRecent=document.getElementById('searchRecent');
+  const searchPanels={all:document.getElementById('s-for-you'),trends:document.getElementById('s-trending'),people:document.getElementById('s-people'),media:document.getElementById('s-media')};
+  function norm(s){return String(s||'').toLowerCase()}
+  function matches(obj,q){return Object.values(obj).some(v=>norm(v).includes(q))}
+  function currentPosts(){return [...SEARCH_BASE.posts,...(api.state.posts||[]).map(p=>({name:api.state.user.name,handle:api.state.user.handle,text:p.text||('Shared '+(p.attachment||'a post'))}))]}
+  function trendHTML(t){return `<div class="trendRow" data-search-term="${esc(t.title)}"><div class="trendTop">${esc(t.category)}</div><div class="trendTitle">${esc(t.title)}</div><div class="trendMeta">${esc(t.meta)}</div></div>`}
+  function personHTML(p){return `<div class="peopleRow"><div class="xAvatar">${esc(p.initials)}</div><div class="peopleCopy"><b>${esc(p.name)}</b><small>${esc(p.handle)}</small>${p.bio?`<div class="trendMeta">${esc(p.bio)}</div>`:''}</div><button class="followBtn" data-handle="${esc(p.handle)}">Follow</button></div>`}
+  function postHTML(p){return `<div class="searchResultPost"><div class="srWho"><b>${esc(p.name)}</b><span>${esc(p.handle)}</span></div><div class="srText">${esc(p.text)}</div></div>`}
+  function mediaHTML(m){return `<div class="mediaResult"><div class="mediaThumb">${esc(m.kind)}</div><div class="mediaCopy"><b>${esc(m.title)}</b><small>${esc(m.meta)}</small></div></div>`}
+  function emptyHTML(q){return `<div class="searchEmpty"><div><b>No results</b><p>Nothing in the local PNGEA prototype matches “${esc(q)}” yet.</p></div></div>`}
+  function renderRecent(){
+    const h=api.state.search.history||[];
+    if(searchInput.value.trim()||!h.length){searchRecent.innerHTML='';searchRecent.style.display='none';return}
+    searchRecent.style.display='block';
+    searchRecent.innerHTML=`<div class="searchRecentHead"><b>Recent</b><button id="clearSearchHistory">Clear all</button></div>`+h.map(q=>`<div class="recentRow" data-recent-query="${esc(q)}"><span class="recentIcon">◷</span><span class="recentQuery">${esc(q)}</span><button class="recentRemove" data-remove-query="${esc(q)}">×</button></div>`).join('');
+  }
+  function commitSearch(q){
+    q=q.trim();if(!q)return;
+    const h=api.state.search.history||[];api.state.search.history=[q,...h.filter(x=>norm(x)!==norm(q))].slice(0,12);api.save();renderRecent();
+  }
+  function renderSearch(){
+    const raw=searchInput.value.trim(),q=norm(raw);searchPill.classList.toggle('hasText',!!raw);renderRecent();
+    let trends=SEARCH_BASE.trends,people=SEARCH_BASE.people,posts=currentPosts(),media=SEARCH_BASE.media;
+    if(q){trends=trends.filter(x=>matches(x,q));people=people.filter(x=>matches(x,q));posts=posts.filter(x=>matches(x,q));media=media.filter(x=>matches(x,q))}
+    const total=trends.length+people.length+posts.length+media.length;
+    if(!raw){
+      searchPanels.all.innerHTML='<div class="kicker">TRENDING NOW</div>'+trends.slice(0,4).map(trendHTML).join('')+'<div class="kicker">WHO TO FOLLOW</div>'+people.slice(0,3).map(personHTML).join('');
+    }else{
+      searchPanels.all.innerHTML=total?`<div class="searchCount">${total} LOCAL RESULTS</div>`+trends.slice(0,3).map(trendHTML).join('')+people.slice(0,3).map(personHTML).join('')+posts.slice(0,5).map(postHTML).join('')+media.slice(0,3).map(mediaHTML).join(''):emptyHTML(raw);
+    }
+    searchPanels.trends.innerHTML=trends.length?trends.map(trendHTML).join(''):emptyHTML(raw||'trends');
+    searchPanels.people.innerHTML=people.length?people.map(personHTML).join(''):emptyHTML(raw||'people');
+    searchPanels.media.innerHTML=(media.length||posts.length)?media.map(mediaHTML).join('')+posts.slice(0,8).map(postHTML).join(''):emptyHTML(raw||'media');
+    document.querySelectorAll('.followBtn').forEach(syncFollowButton);
+  }
+  if(searchInput){
+    searchInput.addEventListener('input',renderSearch);
+    searchInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const q=searchInput.value.trim();if(q){commitSearch(q);renderSearch();api.toast(`Search saved: “${q}”`)}}});
+    searchClear.addEventListener('click',()=>{searchInput.value='';searchInput.focus();renderSearch()});
+    searchRecent.addEventListener('click',e=>{
+      const remove=e.target.closest('[data-remove-query]');if(remove){e.stopPropagation();api.state.search.history=(api.state.search.history||[]).filter(q=>q!==remove.dataset.removeQuery);api.save();renderRecent();return}
+      if(e.target.id==='clearSearchHistory'){api.state.search.history=[];api.save();renderRecent();return}
+      const row=e.target.closest('[data-recent-query]');if(row){searchInput.value=row.dataset.recentQuery;commitSearch(searchInput.value);renderSearch();searchInput.focus()}
+    });
+    document.getElementById('Search').addEventListener('click',e=>{const row=e.target.closest('[data-search-term]');if(row){searchInput.value=row.dataset.searchTerm;commitSearch(searchInput.value);renderSearch();searchInput.focus()}});
+    renderSearch();
+  }
+
+  // ---------------- SETTINGS ----------------
+  const detail=document.getElementById('settingsDetail'),detailTitle=document.getElementById('settingsDetailTitle'),detailBody=document.getElementById('settingsDetailBody');
+  const PAGE_TITLES={account:'Account information',security:'Security and access',privacy:'Privacy and safety',display:'Display and accessibility',notifications:'Notifications',feed:'Feed preferences',help:'Help center',about:'About PNGEA'};
+  function toggleRow(key,title,desc){const on=!!api.state.settings[key];return `<div class="prefRow"><div class="prefCopy"><b>${esc(title)}</b><small>${esc(desc)}</small></div><div class="toggle ${on?'on':''}" data-setting-toggle="${esc(key)}" role="switch" aria-checked="${on}"></div></div>`}
+  function choiceRow(key,title,choices){const current=api.state.settings[key];return `<div class="choiceRow"><b>${esc(title)}</b><div class="choiceSet">${choices.map(([v,l])=>`<button class="choice ${current===v?'active':''}" data-setting-choice="${esc(key)}" data-value="${esc(v)}">${esc(l)}</button>`).join('')}</div></div>`}
+  function pageMarkup(page){
+    const s=api.state.settings;
+    if(page==='account') return `<div class="settingsIntro"><b>Your identity</b><p>These values update locally now and are ready to map to the account service later.</p></div><div class="settingsField"><label>DISPLAY NAME</label><input id="accountName" value="${esc(api.state.user.name)}" maxlength="50"></div><div class="settingsField"><label>HANDLE</label><input id="accountHandle" value="${esc(api.state.user.handle)}" maxlength="30"></div><button class="settingsSave" id="saveAccount">Save changes</button>`;
+    if(page==='security') return `<div class="settingsIntro"><b>Security</b><p>The UI contract is in place. Password, passkeys, sessions, and two-factor authentication will connect when authentication is added.</p></div><div class="staticSetting"><b>Password</b><small>Account backend not connected yet.</small></div><div class="staticSetting"><b>Passkeys</b><small>Ready for backend implementation.</small></div><div class="staticSetting"><b>Active sessions</b><small>This device only in the prototype.</small></div>`;
+    if(page==='privacy') return `<div class="settingsIntro"><b>Control your presence</b><p>Preferences persist locally now; network enforcement comes with the account backend.</p></div>${toggleRow('privateAccount','Private account','Only approved followers can see protected posts.')}${toggleRow('readReceipts','Read receipts','Let people know when you have read their messages.')}${toggleRow('discoverability','Discoverability','Allow your account to appear in people recommendations.')}`;
+    if(page==='display') return `<div class="settingsIntro"><b>Make PNGEA comfortable</b><p>These preferences take effect immediately on this device.</p></div>${toggleRow('reducedMotion','Reduce motion','Minimize nonessential interface animation.')}${toggleRow('compactUI','Compact interface','Tighten conventional social screens without changing PNGEA core navigation.')}`;
+    if(page==='notifications') return `<div class="settingsIntro"><b>Notifications</b><p>Choose what the prototype considers notification-worthy.</p></div>${toggleRow('notifications','Allow notifications','Master notification preference.')}${toggleRow('messageNotifications','Messages','Direct messages and conversation activity.')}${toggleRow('mentionNotifications','Mentions and replies','Activity involving your account.')}${toggleRow('followNotifications','New followers','Notify when someone follows you.')}`;
+    if(page==='feed') return `<div class="settingsIntro"><b>The Stream</b><p>Set default feed behavior without changing the one-stream PNGEA concept.</p></div>${toggleRow('autoplay','Autoplay video','Automatically begin muted video playback in the feed.')}${toggleRow('personalizedFeed','Personalized ranking','Use relevance signals when ordering the stream.')}${choiceRow('feedMode','Default ordering',[['balanced','Balanced'],['latest','Latest'],['following','Following first']])}`;
+    if(page==='help') return `<div class="settingsIntro"><b>Help center</b><p>Baseline support surfaces are ready for real documentation and reporting flows.</p></div><div class="staticSetting"><b>Using PNGEA</b><small>Navigation, posting, messages, communities, and media.</small></div><div class="staticSetting"><b>Safety and reporting</b><small>Reporting and moderation flows will plug in here.</small></div><div class="staticSetting"><b>Contact support</b><small>Support backend not connected yet.</small></div>`;
+    if(page==='about') return `<div class="aboutMark">PNGEA</div><div class="aboutCopy">One stream for conversation, media, live events, communities, and everything around them.<br><br>Prototype foundation v0.30.</div>`;
+    return '';
+  }
+  function applyDisplayPrefs(){document.body.classList.toggle('reduceMotion',!!api.state.settings.reducedMotion);document.body.classList.toggle('compactUI',!!api.state.settings.compactUI)}
+  function refreshIdentity(){
+    document.querySelectorAll('.sideName').forEach(x=>x.textContent=api.state.user.name);document.querySelectorAll('.sideHandle').forEach(x=>x.textContent=api.state.user.handle);
+    document.querySelectorAll('#Profile .profileName').forEach(x=>x.textContent=api.state.user.name);document.querySelectorAll('#Profile .profileHandle').forEach(x=>x.textContent=api.state.user.handle);
+    const top=document.querySelector('#Profile .xTopTitle b');if(top)top.textContent=api.state.user.name;
+    document.querySelectorAll('#Profile .xPostWho b').forEach(x=>x.textContent=api.state.user.name);document.querySelectorAll('#Profile .xPostWho span').forEach(x=>x.textContent=x.textContent.replace(/^@you/,api.state.user.handle));
+  }
+  function renderSettingsPage(page){
+    detailTitle.textContent=PAGE_TITLES[page]||'Settings';detailBody.innerHTML=pageMarkup(page);detail.classList.add('show');
+  }
+  api.renderSettingsRoute=route=>{if(route.screen==='Settings'&&route.detail){renderSettingsPage(route.detail)}else detail.classList.remove('show')};
+  document.querySelectorAll('[data-setting-page]').forEach(row=>row.addEventListener('click',()=>api.navigate('Settings',row.dataset.settingPage)));
+  document.getElementById('settingsBack').addEventListener('click',()=>api.navigate('Settings'));
+  detailBody.addEventListener('click',e=>{
+    const t=e.target.closest('[data-setting-toggle]');
+    if(t){const key=t.dataset.settingToggle;api.state.settings[key]=!api.state.settings[key];api.save();applyDisplayPrefs();renderSettingsPage(api.parseRoute().detail);api.toast(api.state.settings[key]?'On':'Off');return}
+    const c=e.target.closest('[data-setting-choice]');
+    if(c){api.state.settings[c.dataset.settingChoice]=c.dataset.value;api.save();renderSettingsPage(api.parseRoute().detail);api.toast('Preference saved');return}
+    if(e.target.id==='saveAccount'){
+      const name=document.getElementById('accountName').value.trim()||'You';let handle=document.getElementById('accountHandle').value.trim()||'@you';if(!handle.startsWith('@'))handle='@'+handle;handle='@'+handle.slice(1).replace(/[^a-zA-Z0-9_]/g,'').slice(0,29);
+      api.state.user.name=name;api.state.user.handle=handle||'@you';api.save();refreshIdentity();api.toast('Account updated');renderSettingsPage('account');
+    }
+  });
+  applyDisplayPrefs();refreshIdentity();
+
+  // Re-apply current route after feature hooks exist.
+  const r=api.parseRoute();api.renderThreadRoute(r);api.renderSettingsRoute(r);
+})();
+</script>
+
+
+<script>
+(() => {
+  const api=window.PNGEA;
+  if(!api)return;
+  const state=api.state;
+  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const app=document.querySelector('.app');
+  const fmtTime=ts=>{if(!ts)return'';const d=new Date(ts),n=new Date(),delta=n-d;if(delta<60000)return'now';if(delta<3600000)return Math.max(1,Math.floor(delta/60000))+'m';if(delta<86400000)return Math.floor(delta/3600000)+'h';return d.toLocaleDateString([], {weekday:'short'});};
+
+  // Normalize the prototype state without breaking older localStorage versions.
+  state.system={contentMode:'demo',...(state.system||{})};
+  state.user={bio:'Building PNGEA. Media, ideas, film, politics, and whatever else is worth putting into the world.',location:'Columbus, OH',website:'pngea.app',joined:'2026',...(state.user||{})};
+  state.social={following:[],likedPosts:[],repostedPosts:[],baseFollowing:241,baseFollowers:1842,...(state.social||{})};
+  state.postActivity=state.postActivity||{};
+  state.replies=state.replies||{};
+  state.messageMeta=state.messageMeta||{
+    alex:{name:'Alex Rivera',handle:'@alexrivera',initials:'AR',unread:true,updatedAt:Date.now()-120000},
+    maya:{name:'Maya Kim',handle:'@mayak',initials:'MK',unread:false,updatedAt:Date.now()-3600000},
+    crew:{name:'Launch Crew',handle:'5 people',initials:'5',unread:false,updatedAt:Date.now()-21600000},
+    news:{name:'Nia Wells',handle:'@niawells',initials:'NW',unread:false,updatedAt:Date.now()-172800000}
+  };
+  Object.keys(state.messages||{}).forEach(k=>{if(!state.messageMeta[k])state.messageMeta[k]={name:k,handle:'',initials:k.slice(0,2).toUpperCase(),unread:false,updatedAt:Date.now()}});
+  if(!Array.isArray(state.notifications)) state.notifications=[
+    {id:'n1',type:'like',actor:'Maya Kim',text:'and 18 others liked your post.',sub:'“The feed should feel like one continuous public square...”',at:Date.now()-300000,unread:true},
+    {id:'n2',type:'repost',actor:'Alex Rivera',text:'reposted you.',sub:'12m',at:Date.now()-720000,unread:true},
+    {id:'n3',type:'mention',actor:'Nia Wells',text:'mentioned you.',quote:'@you that new message animation is extremely clean',sub:'43m',at:Date.now()-2580000,unread:true},
+    {id:'n4',type:'live',actor:'NOW',text:'City council press conference is live.',sub:'1h',at:Date.now()-3600000,unread:false},
+    {id:'n5',type:'follow',actor:'Jordan Blake',text:'followed you.',sub:'3h',at:Date.now()-10800000,unread:false}
+  ];
+  api.save();
+
+  // Backend boundary: current fixtures are explicitly marked demo content.
+  const feed=document.getElementById('feed');
+  if(feed){
+    [...feed.children].forEach(el=>{if(!el.dataset.localPost)el.dataset.demoContent='true'});
+    if(!feed.querySelector('.liveDataEmpty')){
+      const e=document.createElement('div');e.className='liveDataEmpty';e.innerHTML='<div><b>Nothing here yet</b><small>When PNGEA is connected to live data, new posts will appear here as they arrive.</small></div>';feed.appendChild(e);
+    }
+  }
+  function applyContentMode(){app.dataset.contentMode=state.system.contentMode||'demo'}
+  api.setContentMode=mode=>{state.system.contentMode=mode==='live'?'live':'demo';api.save();applyContentMode();};
+  applyContentMode();
+
+  // ---------- MESSAGES ----------
+  const inbox=document.getElementById('Inbox');
+  const inboxScroll=inbox?.querySelector('.xScroll');
+  const dmSearch=inbox?.querySelector('.dmSearch input');
+  const dmThread=document.getElementById('dmThread');
+  const dmTitle=document.getElementById('dmTitle'),dmHandle=document.getElementById('dmHandle'),dmMessages=document.getElementById('dmMessages'),dmInput=document.getElementById('dmInput');
+  let activeDm=null;
+  function lastMessage(key){const arr=state.messages[key]||[];return arr[arr.length-1]||null}
+  function messagePreview(key){const m=lastMessage(key);return m?(m.from==='me'?'You: ':'')+m.text:'No messages yet'}
+  function renderInbox(filter=''){
+    if(!inboxScroll)return;
+    const q=filter.trim().toLowerCase();
+    const keys=Object.keys(state.messageMeta).sort((a,b)=>(state.messageMeta[b].updatedAt||0)-(state.messageMeta[a].updatedAt||0));
+    const visible=keys.filter(k=>{const m=state.messageMeta[k];return !q||[m.name,m.handle,messagePreview(k)].join(' ').toLowerCase().includes(q)});
+    inboxScroll.innerHTML=visible.length?visible.map(k=>{const m=state.messageMeta[k],lm=lastMessage(k);return `<div class="dmRow" data-dm="${esc(k)}"><div class="xAvatar">${esc(m.initials||'DM')}</div><div class="dmCopy"><div class="dmLine"><b>${esc(m.name)}</b><span>${esc(m.handle||'')}</span><span class="dmTime">${esc(fmtTime(m.updatedAt||(lm&&lm.at)))}</span></div><div class="dmPreview">${esc(messagePreview(k))}</div></div>${m.unread?'<span class="unreadDot"></span>':''}</div>`}).join(''):'<div class="dmEmpty"><b>No conversations</b>Try another search or start a new message.</div>';
+  }
+  function renderThread(key){
+    activeDm=key;const meta=state.messageMeta[key]||{name:'Message',handle:'',initials:'DM'};
+    dmTitle.textContent=meta.name;dmHandle.textContent=meta.handle||'';
+    const av=dmThread.querySelector('.xAvatar');if(av)av.textContent=meta.initials||'DM';
+    dmMessages.innerHTML='<div class="msgDay">TODAY</div>';
+    const msgs=state.messages[key]||[];
+    if(!msgs.length)dmMessages.insertAdjacentHTML('beforeend','<div class="uiState"><div><b>No messages yet</b><small>Start the conversation.</small></div></div>');
+    msgs.forEach(msg=>{const b=document.createElement('div');b.className='msgBubble '+(msg.from==='me'?'me':'them');b.textContent=msg.text;dmMessages.appendChild(b)});
+    meta.unread=false;api.save();renderInbox(dmSearch?.value||'');dmMessages.scrollTop=dmMessages.scrollHeight;syncNotificationIndicators();
+  }
+  api.renderThreadRoute=route=>{if(route.screen==='Inbox'&&route.detail){renderThread(route.detail);dmThread.classList.add('show')}else dmThread.classList.remove('show')};
+  inboxScroll?.addEventListener('click',e=>{const row=e.target.closest('[data-dm]');if(row)api.navigate('Inbox',row.dataset.dm)});
+  dmSearch?.addEventListener('input',()=>renderInbox(dmSearch.value));
+  document.getElementById('dmBack')?.addEventListener('click',()=>api.navigate('Inbox'));
+  document.getElementById('dmSend')?.addEventListener('click',()=>{
+    const text=dmInput.value.trim();if(!text||!activeDm)return;
+    state.messages[activeDm]=state.messages[activeDm]||[];state.messages[activeDm].push({from:'me',text,at:Date.now()});
+    state.messageMeta[activeDm]={...(state.messageMeta[activeDm]||{}),updatedAt:Date.now(),unread:false};api.save();dmInput.value='';renderThread(activeDm);renderInbox();
+  });
+  renderInbox();
+
+  // New-message sheet.
+  const newDmSheet=document.createElement('div');newDmSheet.className='pnSheet';newDmSheet.id='newDmSheet';newDmSheet.innerHTML=`<div class="pnSheetScrim"></div><div class="pnSheetCard"><div class="pnSheetHead"><b>New message</b><span class="pnSheetClose">×</span></div><div class="pnField"><label>NAME OR HANDLE</label><input id="newDmName" placeholder="@someone or name"></div><button class="pnPrimary" id="newDmStart">Start conversation</button></div>`;app.appendChild(newDmSheet);
+  const inboxActions=inbox?.querySelectorAll('.xTop .xAction');if(inboxActions?.length){const composeAction=inboxActions[inboxActions.length-1];composeAction.style.cursor='pointer';composeAction.onclick=()=>newDmSheet.classList.add('show')}
+  newDmSheet.addEventListener('click',e=>{if(e.target.classList.contains('pnSheetScrim')||e.target.classList.contains('pnSheetClose'))newDmSheet.classList.remove('show')});
+  newDmSheet.querySelector('#newDmStart').onclick=()=>{const raw=newDmSheet.querySelector('#newDmName').value.trim();if(!raw)return;const handle=raw.startsWith('@')?raw:'@'+raw.toLowerCase().replace(/[^a-z0-9_]/g,'');const key=handle.replace(/^@/,'')||('dm'+Date.now());if(!state.messageMeta[key])state.messageMeta[key]={name:raw.startsWith('@')?raw.slice(1):raw,handle,initials:(raw.replace('@','').slice(0,2)||'DM').toUpperCase(),unread:false,updatedAt:Date.now()};state.messages[key]=state.messages[key]||[];api.save();newDmSheet.classList.remove('show');newDmSheet.querySelector('#newDmName').value='';renderInbox();api.navigate('Inbox',key)};
+
+  // ---------- NOTIFICATIONS ----------
+  const notifScreen=document.getElementById('Notifications');
+  const nAll=document.getElementById('n-all'),nMentions=document.getElementById('n-mentions');
+  const glyph={like:'♡',repost:'↗',mention:'@',live:'●',follow:'+'};
+  function notifHTML(n){return `<div class="notifRow ${n.unread?'unread':''}" data-notif-id="${esc(n.id)}"><div class="notifGlyph">${glyph[n.type]||'•'}</div><div class="notifCopy"><div class="notifText">${n.actor?`<b>${esc(n.actor)}${n.actor==='NOW'?':':''}</b> `:''}${esc(n.text)}</div>${n.quote?`<div class="notifQuote">${esc(n.quote)}</div>`:''}<div class="notifSub">${esc(n.sub||fmtTime(n.at))}</div></div></div>`}
+  function renderNotifications(){
+    const all=[...state.notifications].sort((a,b)=>(b.at||0)-(a.at||0));const mentions=all.filter(n=>n.type==='mention');
+    if(nAll)nAll.innerHTML=all.length?all.map(notifHTML).join(''):'<div class="notifEmpty"><b>You’re caught up</b>No notifications yet.</div>';
+    if(nMentions)nMentions.innerHTML=mentions.length?mentions.map(notifHTML).join(''):'<div class="notifEmpty"><b>No mentions</b>Mentions will appear here.</div>';
+    syncNotificationIndicators();
+  }
+  function syncNotificationIndicators(){
+    const unread=state.notifications.some(n=>n.unread);document.querySelectorAll('.nav[data-screen="Notifications"]').forEach(n=>n.classList.toggle('hasNotifications',unread));
+  }
+  notifScreen?.addEventListener('click',e=>{const row=e.target.closest('[data-notif-id]');if(!row)return;const n=state.notifications.find(x=>x.id===row.dataset.notifId);if(n){n.unread=false;api.save();renderNotifications()}});
+  const notifGear=notifScreen?.querySelector('.xTop .xAction');if(notifGear){notifGear.style.cursor='pointer';notifGear.onclick=()=>api.navigate('Settings','notifications')}
+  renderNotifications();
+
+  // ---------- PROFILE ----------
+  const profile=document.getElementById('Profile');
+  const pPosts=document.getElementById('p-posts'),pReplies=document.getElementById('p-replies'),pMedia=document.getElementById('p-media'),pLikes=document.getElementById('p-likes');
+  const PEOPLE={
+    '@alexrivera':['Alex Rivera','AR'], '@mayak':['Maya Kim','MK'], '@niawells':['Nia Wells','NW'], '@amaraking':['Amara King','AK'], '@framebyframe':['Frame by Frame','FF'], '@jordan':['Jordan Blake','JB']
+  };
+  const sampleFollowers=[['Maya Kim','@mayak','MK'],['Alex Rivera','@alexrivera','AR'],['Nia Wells','@niawells','NW'],['Jordan Blake','@jordan','JB']];
+  function profilePostHTML(p){const id=p.id||('profile-'+(p.createdAt||Date.now()));return `<div class="profileLocalPost" data-post-id="${esc(id)}"><div class="xAvatar">YOU</div><div class="xPostBody"><div class="xPostWho"><b>${esc(state.user.name)}</b><span>${esc(state.user.handle)} · ${esc(p.createdLabel||fmtTime(p.createdAt)||'now')}</span></div><div class="xPostText">${esc(p.text||('Shared '+(p.attachment||'a post')))}</div>${p.attachment?`<div class="xPostMedia">${esc(String(p.attachment).toUpperCase())}</div>`:''}<div class="xPostActions"><span>◯ 0</span><span>⇄ 0</span><span>♡ 0</span><span>↗</span></div></div></div>`}
+  function renderProfile(){
+    profile.querySelector('.xTopTitle b').textContent=state.user.name;profile.querySelector('.profileName').textContent=state.user.name;profile.querySelector('.profileHandle').textContent=state.user.handle;profile.querySelector('.profileBio').textContent=state.user.bio||'';
+    const meta=profile.querySelector('.profileMeta');meta.innerHTML=`<span>◎ ${esc(state.user.location||'')}</span><span>⌁ ${esc(state.user.website||'')}</span><span>◷ Joined ${esc(state.user.joined||'')}</span>`;
+    const stats=profile.querySelector('.profileStats');const fc=(state.social.baseFollowing||0)+state.social.following.length;stats.innerHTML=`<span class="profileStatLink" data-connections="following"><b>${fc.toLocaleString()}</b>Following</span><span class="profileStatLink" data-connections="followers"><b>${Number(state.social.baseFollowers||0).toLocaleString()}</b>Followers</span>`;
+    const local=[...(state.posts||[])].reverse();pPosts.innerHTML=local.length?local.map(profilePostHTML).join(''):'<div class="profileEmpty"><b>No posts yet</b>Your posts will appear here.</div>';
+    const replies=Object.entries(state.replies).flatMap(([postId,arr])=>(arr||[]).map(r=>({postId,...r})));pReplies.innerHTML=replies.length?replies.slice().reverse().map(r=>`<div class="xPost"><div class="xAvatar">YOU</div><div class="xPostBody"><div class="xPostWho"><b>${esc(state.user.name)}</b><span>${esc(state.user.handle)}</span></div><div class="xPostText">${esc(r.text)}</div></div></div>`).join(''):'<div class="profileEmpty"><b>No replies yet</b>Your replies will appear here.</div>';
+    const media=local.filter(p=>p.attachment);pMedia.innerHTML=media.length?media.map(profilePostHTML).join(''):'<div class="profileEmpty"><b>No media yet</b>Photos and video from your posts will appear here.</div>';
+    const liked=state.social.likedPosts||[];pLikes.innerHTML=liked.length?liked.map(id=>`<div class="xPost"><div class="xAvatar">♡</div><div class="xPostBody"><div class="xPostWho"><b>Liked post</b><span>${esc(id)}</span></div><div class="xPostText">Saved in your local prototype activity.</div></div></div>`).join(''):'<div class="profileEmpty"><b>No likes yet</b>Posts you like will appear here.</div>';
+    wirePostActions(profile);profile.querySelector('.xTopTitle small').textContent=`${local.length.toLocaleString()} posts`;
+  }
+
+  const editLayer=document.createElement('div');editLayer.className='profileEditLayer';editLayer.id='profileEditLayer';editLayer.innerHTML=`<div class="xTop"><span class="xBack" id="profileEditCancel">‹</span><div class="xTopTitle"><b>Edit profile</b></div><button class="pnPrimary" id="profileEditSave">Save</button></div><div class="xScroll pnForm"><div class="pnField"><label>NAME</label><input id="peName"></div><div class="pnField"><label>HANDLE</label><input id="peHandle"></div><div class="pnField"><label>BIO</label><textarea id="peBio"></textarea></div><div class="pnField"><label>LOCATION</label><input id="peLocation"></div><div class="pnField"><label>WEBSITE</label><input id="peWebsite"></div></div>`;app.appendChild(editLayer);
+  profile.querySelector('.profileEdit').onclick=()=>{editLayer.querySelector('#peName').value=state.user.name||'';editLayer.querySelector('#peHandle').value=state.user.handle||'';editLayer.querySelector('#peBio').value=state.user.bio||'';editLayer.querySelector('#peLocation').value=state.user.location||'';editLayer.querySelector('#peWebsite').value=state.user.website||'';editLayer.classList.add('show')};
+  editLayer.querySelector('#profileEditCancel').onclick=()=>editLayer.classList.remove('show');
+  editLayer.querySelector('#profileEditSave').onclick=()=>{state.user.name=editLayer.querySelector('#peName').value.trim()||'You';let h=editLayer.querySelector('#peHandle').value.trim()||'@you';state.user.handle=h.startsWith('@')?h:'@'+h;state.user.bio=editLayer.querySelector('#peBio').value.trim();state.user.location=editLayer.querySelector('#peLocation').value.trim();state.user.website=editLayer.querySelector('#peWebsite').value.trim();api.save();editLayer.classList.remove('show');renderProfile();api.toast('Profile updated')};
+
+  const connections=document.createElement('div');connections.className='connectionsLayer';connections.id='connectionsLayer';connections.innerHTML=`<div class="xTop"><span class="xBack" id="connectionsBack">‹</span><div class="xTopTitle"><b id="connectionsTitle">Following</b></div></div><div class="xTabs" id="connectionsTabs"><div class="xTab active" data-connections-tab="following">Following</div><div class="xTab" data-connections-tab="followers">Followers</div></div><div class="xScroll" id="connectionsBody"></div>`;app.appendChild(connections);
+  function renderConnections(kind){connections.dataset.kind=kind;connections.querySelector('#connectionsTitle').textContent=kind==='followers'?'Followers':'Following';connections.querySelectorAll('[data-connections-tab]').forEach(t=>t.classList.toggle('active',t.dataset.connectionsTab===kind));const body=connections.querySelector('#connectionsBody');let rows;if(kind==='followers')rows=sampleFollowers;else rows=(state.social.following||[]).map(h=>{const p=PEOPLE[h]||[h.replace('@',''),h.slice(1,3).toUpperCase()];return[p[0],h,p[1]]});body.innerHTML=rows.length?rows.map(([name,handle,ini])=>`<div class="connectionRow"><div class="xAvatar">${esc(ini)}</div><div class="connectionCopy"><b>${esc(name)}</b><small>${esc(handle)}</small></div>${kind==='following'?`<button class="followBtn" data-handle="${esc(handle)}">Following</button>`:''}</div>`).join(''):'<div class="connectionEmpty"><b>No one here yet</b>This list will fill as your network grows.</div>';syncAllFollowButtons()}
+  profile.addEventListener('click',e=>{const s=e.target.closest('[data-connections]');if(s){renderConnections(s.dataset.connections);connections.classList.add('show')}});
+  connections.querySelector('#connectionsBack').onclick=()=>connections.classList.remove('show');connections.querySelectorAll('[data-connections-tab]').forEach(t=>t.onclick=()=>renderConnections(t.dataset.connectionsTab));
+
+  // ---------- POST INTERACTIONS ----------
+  function hashText(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)}
+  function getPostId(container,index=0){if(container.dataset.postId)return container.dataset.postId;if(container.dataset.localPost)return container.dataset.localPost;const text=(container.querySelector('.body,.xPostText,.longTitle,.breakTitle,.caption')?.textContent||container.textContent||'post').trim().slice(0,180);const id='demo-'+hashText(text+'-'+index);container.dataset.postId=id;return id}
+  function parseCount(text){const m=String(text).match(/[\d,.]+[KMB]?/i);if(!m)return 0;let s=m[0].replace(/,/g,''),mult=1;if(/K$/i.test(s)){mult=1e3;s=s.slice(0,-1)}else if(/M$/i.test(s)){mult=1e6;s=s.slice(0,-1)}else if(/B$/i.test(s)){mult=1e9;s=s.slice(0,-1)}return Math.round(parseFloat(s)*mult)||0}
+  function compact(n){return n>=1e6?(n/1e6).toFixed(n>=1e7?0:1).replace('.0','')+'M':n>=1e3?(n/1e3).toFixed(n>=1e4?0:1).replace('.0','')+'K':String(n)}
+  function actState(id){const st=state.postActivity[id]||(state.postActivity[id]={liked:false,reposted:false,base:{reply:0,repost:0,like:0},seeded:{}});st.base=st.base||{reply:0,repost:0,like:0};st.seeded=st.seeded||{};return st}
+  function renderActionSpan(span,id,kind){const st=actState(id);let base=st.base[kind]||0,on=false,icon='';if(kind==='reply'){icon='◯'}if(kind==='repost'){icon='⇄';on=st.reposted}if(kind==='like'){icon='♡';on=st.liked}if(kind==='share'){span.textContent='↗';return}const n=base+(on?1:0);span.textContent=(kind==='like'&&on?'♥':icon)+(n?' '+compact(n):'');span.classList.toggle('on',on);span.classList.toggle('likeOn',kind==='like'&&on);span.classList.toggle('repostOn',kind==='repost'&&on)}
+  function wirePostActions(root=document){
+    const groups=[...root.querySelectorAll('.actions,.xPostActions')];groups.forEach((g,idx)=>{const container=g.closest('[data-local-post],article,.xPost,.profileLocalPost,.edgePost,.longVideo,.breaking')||g.parentElement;const id=getPostId(container,idx);const spans=[...g.children];['reply','repost','like','share'].forEach((kind,i)=>{const s=spans[i];if(!s)return;s.classList.remove('like');s.classList.add('pnAction');s.dataset.action=kind;s.dataset.postId=id;const st=actState(id);if(kind!=='share'&&!st.seeded[kind]){st.base[kind]=parseCount(s.textContent);st.seeded[kind]=true}renderActionSpan(s,id,kind)})});api.save();
+  }
+  function syncAllFollowButtons(){document.querySelectorAll('.followBtn').forEach(btn=>{const h=btn.dataset.handle;if(!h)return;const on=state.social.following.includes(h);btn.textContent=on?'Following':'Follow';btn.style.background=on?'#151515':'#eee';btn.style.color=on?'#eee':'#080808';btn.style.border=on?'1px solid #333':'0'})}
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('.pnAction');if(!a)return;e.preventDefault();e.stopImmediatePropagation();const id=a.dataset.postId,kind=a.dataset.action,st=actState(id);
+    if(kind==='like'){st.liked=!st.liked;const arr=state.social.likedPosts;const i=arr.indexOf(id);if(st.liked&&i<0)arr.push(id);if(!st.liked&&i>=0)arr.splice(i,1);api.toast(st.liked?'Liked':'Like removed')}
+    else if(kind==='repost'){st.reposted=!st.reposted;const arr=state.social.repostedPosts;const i=arr.indexOf(id);if(st.reposted&&i<0)arr.push(id);if(!st.reposted&&i>=0)arr.splice(i,1);api.toast(st.reposted?'Reposted':'Repost removed')}
+    else if(kind==='reply'){const text=prompt('Reply');if(text&&text.trim()){state.replies[id]=state.replies[id]||[];state.replies[id].push({text:text.trim(),at:Date.now()});st.base.reply=(st.base.reply||0)+1;api.toast('Reply posted')}}
+    else if(kind==='share'){const url=location.href;if(navigator.share)navigator.share({title:'PNGEA',url}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>api.toast('Link copied')).catch(()=>api.toast('Share ready'));else api.toast('Share ready')}
+    api.save();wirePostActions(document);renderProfile();
+  },true);
+
+  // Follow buttons from v0.30 already mutate state; keep all copies synchronized after any click.
+  document.addEventListener('click',e=>{if(e.target.closest('.followBtn'))setTimeout(()=>{syncAllFollowButtons();renderProfile()},0)});
+
+  // Rerender local profile/feed interaction wiring after creating a post.
+  const oldToast=api.toast;wirePostActions(document);renderProfile();syncAllFollowButtons();
+  const observer=new MutationObserver(()=>wirePostActions(document));if(feed)observer.observe(feed,{childList:true,subtree:false});
+
+  // Route-level side effects.
+  function routeEffects(){const r=api.parseRoute();if(r.screen==='Inbox')renderInbox(dmSearch?.value||'');if(r.screen==='Notifications'){state.notifications.forEach(n=>n.unread=false);api.save();renderNotifications()}if(r.screen==='Profile')renderProfile()}
+  window.addEventListener('hashchange',routeEffects);window.addEventListener('popstate',routeEffects);api.renderThreadRoute(api.parseRoute());routeEffects();
+
+  api.renderInbox=renderInbox;api.renderNotifications=renderNotifications;api.renderProfile=renderProfile;api.wirePostActions=wirePostActions;
+})();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+
+</body>
+</html>
