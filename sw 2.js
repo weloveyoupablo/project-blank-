@@ -1,4 +1,4 @@
-const CACHE = 'pngea-shell-v0405-session-polish-1';
+const CACHE = 'pngea-shell-v0407-weixin-ui-fixpack-1';
 
 self.addEventListener('install', event => {
   self.skipWaiting();
